@@ -1,0 +1,2 @@
+create database accountingProgram1;
+use accountingProgram1;
