@@ -14,6 +14,6 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
 //    @Query("SELECT amountNetto FROM Invoice WHERE Invoice.id = :id")
 //    List <Invoice> findAllAmountNetto(double amountNetto);
 
-
+    Long deleteInvoiceById(Long id);
 
 }

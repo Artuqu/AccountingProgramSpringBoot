@@ -13,48 +13,45 @@
 <br>
 <table border="2" color="blue">
 
-    <thead>
-    <th>Lp.</th>
-    <th>Name</th>
-    <th>Address</th>
-    <th>E-Mail</th>
-    <th>Nip</th>
-    <th>Bank Account</th>
-    <th>Action</th>
+    <tr>
+        <th>Lp.</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>E-Mail</th>
+        <th>Nip</th>
+        <th>Bank Account</th>
+        <th>Action</th>
 
-    </thead>
-
-    <tbody>
-
-    <c:forEach items="${companies}" var="company">
-        <tr>
-            <td><c:out value="${company.id}"/></td>
-            <td><c:out value="${company.name}"/></td>
-            <td><c:out value="${company.address}"/></td>
-            <td><c:out value="${company.email}"/></td>
-            <td><c:out value="${company.NIP}"/></td>
-            <td><c:out value="${company.bankAccount}"/></td>
-            <td>
+    </tr>
 
 
-                <a href="http://localhost:8080/invoice/all/${company.id}" style="text-decoration: none">Show all invoice</a>
-                <br>
-                <br><a href="http://localhost:8080/invoice/add/${company.id}" style="text-decoration: none">Add invoice</a>
-                <br>
-                <br><a href="http://localhost:8080/admin/company/edit/${company.id}"
-                       style="text-decoration: none">Edit Company</a>
-                <br>
-                <br><a href="http://localhost:8080/admin/company/delete/${company.id}" style="text-decoration:none">Delete Company</a>
+    <tr th:each="company : ${companies}">
+<!--        <td><em th:text="${company.id}"></em></td>-->
+<!--        <td><em th:text="&{company.name}"></em></td>-->
+<!--        <td><em th:text="${company.address}"></em></td>-->
+<!--        <td><em th:text="${company.email}"></em></td>-->
+<!--        <td><em th:text="${company.NIP}"></em></td>-->
+<!--        <td><em th:text="${company.bankAccount}"></em></td>-->
 
-            </td>
-        </tr>
+<td>
 
-        <link rel="stylesheet" th:href="${/css/style.css}">
-    </c:forEach>
+        <br>
+        <a href="http://localhost:8080/invoice/all/${company.id}" style="text-decoration: none">Show all invoice</a>
+        <br>
+        <a href="http://localhost:8080/invoice/add/${company.id}" style="text-decoration: none">Add invoice</a>
+        <br>
+        <a href="http://localhost:8080/admin/company/edit/${company.id}" style="text-decoration: none">Edit
+            Company</a>
+        <br>
+        <a href="http://localhost:8080/admin/company/delete/${company.id}" style="text-decoration:none">Delete
+            Company</a>
+</td>
 
 
-    </tbody>
+    </tr>
+
+
 </table>
-
+<link rel="stylesheet" th:href="@{/css/style.css}">
 </body>
 </html>

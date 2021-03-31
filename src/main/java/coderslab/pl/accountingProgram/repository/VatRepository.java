@@ -12,5 +12,5 @@ import javax.transaction.Transactional;
 @Repository
 public interface VatRepository extends JpaRepository<Vat, Long> {
 
-
+    Long deleteVatById(Long id);
 }

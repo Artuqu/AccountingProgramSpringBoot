@@ -14,4 +14,5 @@ import javax.transaction.Transactional;
 public interface InvoiceDirectionRepository extends JpaRepository<InvoiceDirection, Long> {
 
 
+
 }

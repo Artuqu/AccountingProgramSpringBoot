@@ -2,6 +2,7 @@ package coderslab.pl.accountingProgram.controller;
 
 
 import coderslab.pl.accountingProgram.entity.Company;
+import coderslab.pl.accountingProgram.repository.AccountingService;
 import coderslab.pl.accountingProgram.repository.CompanyRepository;
 import coderslab.pl.accountingProgram.repository.VatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 
-//@SessionScope po co to?
+
 
 @Controller
 @RequestMapping("/admin/company")
@@ -23,20 +24,21 @@ public class CompanyController {
 
     public final CompanyRepository cr;
     public final VatRepository vr;
-//    private final InvoiceRepository ir;
+    public final AccountingService as;
+
 
 
     @Autowired
-    public CompanyController(VatRepository vr, CompanyRepository cr) {
+    public CompanyController(VatRepository vr, CompanyRepository cr, AccountingService as) {
 
         this.vr = vr;
-//        this.ir = ir;
+        this.as = as;
         this.cr = cr;
     }
     @GetMapping("/all")
     public String showCompanies(Model m) {
 
-        List<Company> companies = cr.findAll();
+        List<Company> companies = as.findAllCompanies();
         m.addAttribute("companies", companies);
         return "companies/allCompanies";
     }
@@ -54,10 +56,10 @@ public class CompanyController {
         if (result.hasErrors()) {
             return "companies/addCompany";
         }
-        this.cr.save(company);
+        this.as.save(company);
         m.addAttribute("company", company);
 
-        return "redirect:all";
+        return "redirect::all";
     }
 
     //edit

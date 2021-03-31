@@ -7,6 +7,7 @@ import coderslab.pl.accountingProgram.repository.AccountingService;
 import coderslab.pl.accountingProgram.repository.CompanyRepository;
 import coderslab.pl.accountingProgram.repository.InvoiceRepository;
 import coderslab.pl.accountingProgram.repository.VatRepository;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -20,47 +21,45 @@ public class JpaAccountingService implements AccountingService {
 
 
     @Override
-    public List<Company> findAllCompanies() {
-        return null;
-    }
+    public List<Company> findAllCompanies() { return cr.findAll();}
 
     @Override
     public List<Invoice> findAllInvoices() {
-        return null;
+        return ir.findAll();
     }
 
     @Override
-    public List<Vat> findAllVates() {
-        return null;
-    }
+    public List<Vat> findAllVates() { return vr.findAll(); }
 
     @Override
     public Company save(Company company) {
-        return null;
+        return cr.save(company);
     }
 
     @Override
     public Invoice save(Invoice invoice) {
-        return null;
+        return ir.save(invoice);
     }
 
     @Override
     public Vat save(Vat vat) {
-        return null;
+        return vr.save(vat);
     }
 
     @Override
-    public Company delete(Company company) {
-        return null;
+    public Long deleteCompany(Long id) {
+        return cr.deleteCompanyById(id);
     }
 
     @Override
-    public Invoice delete(Invoice invoice) {
-        return null;
+    public Long deleteVat(Long id) {
+        return vr.deleteVatById(id);
     }
 
     @Override
-    public Vat delete(Vat vat) {
-        return null;
+    public Long deleteInvoice(Long id) {
+        return ir.deleteInvoiceById(id);
     }
+
+
 }
