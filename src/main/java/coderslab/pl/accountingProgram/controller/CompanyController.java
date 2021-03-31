@@ -73,13 +73,12 @@ public class CompanyController {
         if (result.hasErrors()) {
             return "companies/editCompany";
         }
-        Company one = cr.getOne(company.getId())
-                .setName(company.getName())
-                .setAddress(company.getAddress())
-                .setBankAccount(company.getBankAccount())
-                .setEmail(company.getEmail())
-                .setNIP(company.getNIP());
-
+        Company one = cr.getOne(company.getId());
+                one.setName(company.getName());
+                one.setAddress(company.getAddress());
+                one.setBankAccount(company.getBankAccount());
+                one.setEmail(company.getEmail());
+                one.setNIP(company.getNIP());
 
         this.cr.save(one);
         m.addAttribute("company", one);

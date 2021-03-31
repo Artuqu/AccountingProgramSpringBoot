@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create a new company</title>
+</head>
+<body>
+<div>
+    <a href= "http://localhost:8080" style="text-decoration:none">Back to main menu</a>
+</div>
+<br>
+<div>
+    Please type your data:
+</div>
+
+<form method="post" th:object="${company}">
+
+    <br>
+    <div>
+        <label>Company Name:
+        <input path="name" type="text" th:field="*{name}"/>
+        <errors path="name"/>
+        </label>
+    </div>
+
+    <div>
+        <label>Address:
+        <input path="address" type="text" th:field="*{address}"/>
+        <errors path="address"/>
+        </label>
+    </div>
+
+    <div>
+        <label>E-mail:
+        <input path="email" type="text" th:field="*{email}"/>
+        <errors path="email"/>
+        </label>
+    </div>
+
+    <div>
+        <label>NIP:
+        <input path="NIP" type="text" th:field="*{NIP}"/>
+        <errors path="NIP"/>
+        </label>
+    </div>
+    <div>
+        <label>Bank Account:
+        <input path="bankAccount" type="text" th:field="*{bankAccount}"/>
+        <errors path="bankAccount"/>
+        </label>
+    </div>
+
+      <div>
+         <errors path="*"/>
+      </div>
+<!--make mapping for errors-->
+
+    <br>
+    <div>
+        <input type="submit" value="Add company">
+    </div>
+
+
+</form>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+
+</body>
+</html>

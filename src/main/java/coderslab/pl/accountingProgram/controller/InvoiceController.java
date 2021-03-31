@@ -119,13 +119,13 @@ public class InvoiceController {
 //        if (result.hasErrors()) {
 //            return "invoices/editInvoices";
 //        }
-        Invoice one = ir.getOne(invoice.getId())
-                .setInvoiceNumber(invoice.getInvoiceNumber())
-                .setDate(invoice.getDate())
-                .setInvoiceDirection(invoice.getInvoiceDirection())
-                .setAmountNetto(invoice.getAmountNetto())
-                .setAmountBrutto(invoice.getAmountBrutto())
-                .setVat(invoice.getVat());
+        Invoice one = ir.getOne(invoice.getId());
+                one.setDate(invoice.getDate());
+                one.setInvoiceNumber(invoice.getInvoiceNumber());
+                one.setInvoiceDirection(invoice.getInvoiceDirection());
+                one.setAmountNetto(invoice.getAmountNetto());
+                one.setAmountBrutto(invoice.getAmountBrutto());
+                one.setVat(invoice.getVat());
 
 
 

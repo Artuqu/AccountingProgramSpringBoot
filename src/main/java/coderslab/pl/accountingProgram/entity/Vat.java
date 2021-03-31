@@ -1,5 +1,8 @@
 package coderslab.pl.accountingProgram.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.Entity;
@@ -7,6 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Getter
+@Setter
+@ToString
 @Proxy(lazy = false)
 @Entity
 public class Vat {
@@ -20,44 +26,5 @@ public class Vat {
 
     private double value;
 
-    public Vat() {
-    }
 
-    public String getPercents() {
-        return percents;
-    }
-
-    public Vat setPercents(String percents) {
-        this.percents = percents;
-        return this;
-    }
-    public double getValue() {
-        return value;}
-
-    public Vat setValue(double value) {
-        this.value = value;
-        return this;
-    }
-
-
-
-
-
-    public long getId() {
-        return id;
-    }
-
-    public Vat setId(long id) {
-        this.id = id;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "Vat{" +
-                "id=" + id +
-                ", percents='" + percents + '\'' +
-                ", value=" + value +
-                '}';
-    }
 }
