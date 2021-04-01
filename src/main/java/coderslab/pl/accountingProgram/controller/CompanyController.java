@@ -2,9 +2,10 @@ package coderslab.pl.accountingProgram.controller;
 
 
 import coderslab.pl.accountingProgram.entity.Company;
-import coderslab.pl.accountingProgram.repository.AccountingService;
+
 import coderslab.pl.accountingProgram.repository.CompanyRepository;
-import coderslab.pl.accountingProgram.repository.VatRepository;
+
+import coderslab.pl.accountingProgram.service.JpaAccountingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,17 +23,19 @@ import java.util.List;
 @RequestMapping("/admin/company")
 public class CompanyController {
 
-    public final AccountingService as;
+    public final JpaAccountingService jas;
+
 
     @Autowired
-    public CompanyController(AccountingService as) {
-        this.as = as;
+    public CompanyController(JpaAccountingService jas) {
+        this.jas = jas;
+
 
     }
     @GetMapping("/all")
     public String showCompanies(Model m) {
 
-        List<Company> companies = as.findAllCompanies();
+        List<Company> companies = jas.findAllCompanies();
         m.addAttribute("companies", companies);
         return "companies/allCompanies";
     }
@@ -50,7 +53,7 @@ public class CompanyController {
         if (result.hasErrors()) {
             return "companies/addCompany";
         }
-        this.as.save(company);
+        this.jas.save(company);
         m.addAttribute("company", company);
 
         return "redirect::all";
@@ -59,7 +62,7 @@ public class CompanyController {
     //edit
     @GetMapping("edit/{id}")
     public String editCompany(@PathVariable long id, Model m) {
-        m.addAttribute("company", as.getCompany(id));
+        m.addAttribute("company", jas.findCompany(id));
         return "companies/editCompany";
     }
 
@@ -69,14 +72,14 @@ public class CompanyController {
         if (result.hasErrors()) {
             return "companies/editCompany";
         }
-        Company one = as.getCompany(company.getId());
+        Company one = jas.findCompany(company.getId());
                 one.setName(company.getName());
                 one.setAddress(company.getAddress());
                 one.setBankAccount(company.getBankAccount());
                 one.setEmail(company.getEmail());
                 one.setNIP(company.getNIP());
 
-        this.as.save(one);
+        this.jas.save(one);
         m.addAttribute("company", one);
         return "redirect:all";
     }
@@ -86,7 +89,7 @@ public class CompanyController {
     @Transactional
     @GetMapping("delete/{id}")
     public String deleteCompany(@PathVariable long id) {
-        this.as.deleteCompany(id);
+        this.jas.deleteCompany(id);
         return "redirect:../all";
     }
 

@@ -12,5 +12,7 @@ import javax.transaction.Transactional;
 @Repository
 public interface CompanyRepository extends JpaRepository<Company, Long>{
 
-Long deleteCompanyById(Long id);
+long deleteCompanyById(long id);
+
+
 }

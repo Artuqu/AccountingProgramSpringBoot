@@ -9,6 +9,7 @@ import coderslab.pl.accountingProgram.repository.CompanyRepository;
 import coderslab.pl.accountingProgram.repository.InvoiceDirectionRepository;
 import coderslab.pl.accountingProgram.repository.InvoiceRepository;
 import coderslab.pl.accountingProgram.repository.VatRepository;
+import coderslab.pl.accountingProgram.service.JpaAccountingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,25 +27,18 @@ import java.util.List;
 @RequestMapping("invoice")
 public class InvoiceController {
 
-    private final CompanyRepository cr;
-    private final VatRepository vr;
-    private final InvoiceRepository ir;
-    private final InvoiceDirectionRepository idr;
-    private final Calculator c;
+    private final JpaAccountingService jas;
 
     @Autowired
-    public InvoiceController(Calculator c, InvoiceDirectionRepository idr, VatRepository vr, InvoiceRepository ir, CompanyRepository cr){
-        this.ir=ir;
-        this.vr=vr;
-        this.cr=cr;
-        this.idr=idr;
-        this.c=c;
+    public InvoiceController(JpaAccountingService jas){
+
+        this.jas=jas;
     }
 
     @GetMapping("/all/{id}")
     public String showInvoices(Model m, @PathVariable long id) {
-        cr.getOne(id);
-        List<Invoice> invoices = ir.findAll();
+        jas.findCompany(id);
+        List<Invoice> invoices = jas.findAllInvoices();
         m.addAttribute("invoices", invoices);
         return "invoices/allInvoices";
     }
@@ -53,7 +47,7 @@ public class InvoiceController {
     @GetMapping("/add/{id}")
     public String addInvoice(Model m, @PathVariable long id) {
         m.addAttribute("invoice", new Invoice());
-        cr.getOne(id);
+        jas.findCompany(id);
         return "invoices/addInvoice";
     }
 
@@ -73,7 +67,7 @@ public class InvoiceController {
             return "invoices/addInvoice";
         }
         invoice.getCompany();
-        this.ir.save(invoice);
+        this.jas.save(invoice);
         m.addAttribute("invoice", invoice);
 
         return "redirect:../all/{id}";
@@ -82,15 +76,13 @@ public class InvoiceController {
 
 
     @ModelAttribute("companies")
-    public List<Company> companies(){
-        return cr.findAll();
-    }
+    public List<Company> companies(){return jas.findAllCompanies();}
 
     @ModelAttribute("vates")
-    public List<Vat> vates(){return vr.findAll();}
+    public List<Vat> vates(){return jas.findAllVates();}
 
     @ModelAttribute("directions")
-    public List<InvoiceDirection> directions(){return idr.findAll();}
+    public List<InvoiceDirection> directions(){return jas.findAllDirections();}
 
 //    @ModelAttribute("netto")
 //    public List<Invoice> netto(@PathVariable double amountNetto) {
@@ -100,7 +92,7 @@ public class InvoiceController {
     @Transactional
     @GetMapping("delete/{id}")
     public String deleteInvoice(@PathVariable long id) {
-        this.ir.deleteById(id);
+        this.jas.deleteInvoice(id);
         return "invoices/deleted";
     }
 
@@ -109,7 +101,7 @@ public class InvoiceController {
     //edit
     @GetMapping("edit/{id}")
     public String editCompany(@PathVariable long id, Model m) {
-        m.addAttribute("invoice", ir.getOne(id));
+        m.addAttribute("invoice", jas.findInvoice(id));
         return "invoices/editInvoices";
     }
 
@@ -119,7 +111,7 @@ public class InvoiceController {
 //        if (result.hasErrors()) {
 //            return "invoices/editInvoices";
 //        }
-        Invoice one = ir.getOne(invoice.getId());
+        Invoice one = jas.findInvoice(invoice.getId());
                 one.setDate(invoice.getDate());
                 one.setInvoiceNumber(invoice.getInvoiceNumber());
                 one.setInvoiceDirection(invoice.getInvoiceDirection());
@@ -129,31 +121,31 @@ public class InvoiceController {
 
 
 
-        this.ir.save(one);
+        this.jas.save(one);
         m.addAttribute("invoice", one);
         return "invoices/success";
     }
 
     //model for selling
     @ModelAttribute("nettosSell")
-    public List<Invoice> netto(){return c.getAllNettoSell();}
+    public List<Invoice> netto(){return jas.getAllNettoSell();}
 
     @ModelAttribute("bruttosSell")
-    public List<Invoice> brutto(){return c.getAllBruttoSell();}
+    public List<Invoice> brutto(){return jas.getAllBruttoSell();}
 
     @ModelAttribute("allVatSell")
-    public List<Invoice> allVates(){return c.getAllVatSell();}
+    public List<Invoice> allVates(){return jas.getAllVatSell();}
 
 
 //    model for buying
 
     @ModelAttribute("nettosBuy")
-    public List<Invoice> nettoBuy(){return c.getAllNettoBuy();}
+    public List<Invoice> nettoBuy(){return jas.getAllNettoBuy();}
 
     @ModelAttribute("bruttosBuy")
-    public List<Invoice> bruttoBuy(){return c.getAllBruttoBuy();}
+    public List<Invoice> bruttoBuy(){return jas.getAllBruttoBuy();}
 
     @ModelAttribute("allVatBuy")
-    public List<Invoice> allVatesBuy(){return c.getAllVatBuy();}
+    public List<Invoice> allVatesBuy(){return jas.getAllVatBuy();}
 
 }
