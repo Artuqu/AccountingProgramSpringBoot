@@ -21,5 +21,8 @@ public Long deleteCompany(Long id);
 public Long deleteVat(Long id);
 public Long deleteInvoice(Long id);
 
+public Company getCompany (Long id);
+public Invoice getInvoice (Long id);
+
 
 }

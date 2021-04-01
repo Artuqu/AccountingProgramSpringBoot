@@ -62,4 +62,15 @@ public class JpaAccountingService implements AccountingService {
     }
 
 
+    @Override
+    public Company getCompany(Long id) {
+        return cr.getOne(id);
+    }
+
+    @Override
+    public Invoice getInvoice(Long id) {
+        return ir.getOne(id);
+    }
+
+
 }

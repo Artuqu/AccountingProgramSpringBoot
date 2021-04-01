@@ -22,18 +22,12 @@ import java.util.List;
 @RequestMapping("/admin/company")
 public class CompanyController {
 
-    public final CompanyRepository cr;
-    public final VatRepository vr;
     public final AccountingService as;
 
-
-
     @Autowired
-    public CompanyController(VatRepository vr, CompanyRepository cr, AccountingService as) {
-
-        this.vr = vr;
+    public CompanyController(AccountingService as) {
         this.as = as;
-        this.cr = cr;
+
     }
     @GetMapping("/all")
     public String showCompanies(Model m) {
@@ -65,7 +59,7 @@ public class CompanyController {
     //edit
     @GetMapping("edit/{id}")
     public String editCompany(@PathVariable long id, Model m) {
-        m.addAttribute("company", cr.getOne(id));
+        m.addAttribute("company", as.getCompany(id));
         return "companies/editCompany";
     }
 
@@ -75,14 +69,14 @@ public class CompanyController {
         if (result.hasErrors()) {
             return "companies/editCompany";
         }
-        Company one = cr.getOne(company.getId());
+        Company one = as.getCompany(company.getId());
                 one.setName(company.getName());
                 one.setAddress(company.getAddress());
                 one.setBankAccount(company.getBankAccount());
                 one.setEmail(company.getEmail());
                 one.setNIP(company.getNIP());
 
-        this.cr.save(one);
+        this.as.save(one);
         m.addAttribute("company", one);
         return "redirect:all";
     }
@@ -92,7 +86,7 @@ public class CompanyController {
     @Transactional
     @GetMapping("delete/{id}")
     public String deleteCompany(@PathVariable long id) {
-        this.cr.deleteById(id);
+        this.as.deleteCompany(id);
         return "redirect:../all";
     }
 
