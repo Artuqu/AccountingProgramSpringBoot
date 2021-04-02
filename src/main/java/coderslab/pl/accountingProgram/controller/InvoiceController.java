@@ -1,14 +1,10 @@
 package coderslab.pl.accountingProgram.controller;
 
-import coderslab.pl.accountingProgram.calculator.Calculator;
+
 import coderslab.pl.accountingProgram.entity.Company;
 import coderslab.pl.accountingProgram.entity.Invoice;
 import coderslab.pl.accountingProgram.entity.InvoiceDirection;
 import coderslab.pl.accountingProgram.entity.Vat;
-import coderslab.pl.accountingProgram.repository.CompanyRepository;
-import coderslab.pl.accountingProgram.repository.InvoiceDirectionRepository;
-import coderslab.pl.accountingProgram.repository.InvoiceRepository;
-import coderslab.pl.accountingProgram.repository.VatRepository;
 import coderslab.pl.accountingProgram.service.JpaAccountingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -44,5 +44,9 @@ public class Company {
 //    private List<Invoice> invoices;
 
 
+    public Company() {
+    }
+
+
 
 }

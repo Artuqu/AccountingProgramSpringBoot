@@ -5,14 +5,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.4.4</version>
+		<version>2.4.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>coderslab.pl</groupId>
 	<artifactId>accountingProgram</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>Demo Version</version>
 	<name>accountingProgram</name>
-	<description>accountingProgram made in Spring Boot</description>
+	<description>Accounting Program made in Spring Boot</description>
 	<properties>
 		<java.version>14</java.version>
 	</properties>
@@ -28,6 +28,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+			<version>2.1.2.RELEASE</version>
 		</dependency>
 
 		<dependency>
@@ -59,6 +60,17 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>6.1.6.Final</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>

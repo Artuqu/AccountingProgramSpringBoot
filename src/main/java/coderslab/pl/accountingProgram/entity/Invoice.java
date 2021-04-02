@@ -44,6 +44,6 @@ public class Invoice {
 
     private double amountBrutto;
 
-
-
+    public Invoice() {
+    }
 }

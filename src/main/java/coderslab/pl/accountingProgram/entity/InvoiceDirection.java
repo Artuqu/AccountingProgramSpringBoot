@@ -27,5 +27,6 @@ public class InvoiceDirection {
     @NotBlank
     private String direction;
 
-
+    public InvoiceDirection() {
+    }
 }

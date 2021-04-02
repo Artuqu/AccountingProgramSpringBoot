@@ -1,10 +1,10 @@
-package coderslab.pl.accountingProgram.repository;
-
+package coderslab.pl.accountingProgram.service;
 import coderslab.pl.accountingProgram.entity.Company;
 import coderslab.pl.accountingProgram.entity.Invoice;
 import coderslab.pl.accountingProgram.entity.InvoiceDirection;
 import coderslab.pl.accountingProgram.entity.Vat;
 import java.util.List;
+
 
 public interface AccountingService {
 
