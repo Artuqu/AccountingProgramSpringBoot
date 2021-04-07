@@ -1,10 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
+        let vat = document.querySelector("#vat");
 
-//
-
-    document.querySelector("#vat").addEventListener("change", function () {
+    vat.addEventListener("change", function () {
         let val;
-        let vatValue = document.querySelector("#vat").value;
+        let vatValue = vat.value;
 
         function getVatValue() {
             if (vatValue == 1) {
@@ -21,12 +20,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         let netto = document.querySelector("#amountNetto").value;
-
         let brutto = document.querySelector("#amountBrutto");
 
+
         // I changed focus to change
-        brutto.addEventListener("focus", function () {
+        document.body.addEventListener("change", event=>  {
+        if (event.target===vat || event.target===netto){
             let a = brutto.value = (getVatValue() * netto).toFixed(2);
+            return a;}
             return a.toFixed(2);
         })
 
@@ -39,9 +40,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 })
-// onchange on lost focus
-// let value1 = count1.value;
 
-
-// });
 

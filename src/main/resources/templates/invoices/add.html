@@ -3,79 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <title>Adding new invoice</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <div>
-    <a th:href= "@{/admin/company/all}">Back to company list</a>
+    <a th:href="@{/admin/company/all}">Back to company list</a>
 </div>
 <br>
 <div>
-    <b>Please enter your invoice:</b>
+    <p>Please enter your invoice:</p>
 </div>
 <br>
 
-    <form method="post" th:object="${invoice}">
-<!--              <div>-->
-<!--                  <label>Select company name or add new one-->
-<!--                   <select path="company" th:field="*{companies}" th:value="${company.id}" th:textContext="${company.name}" />-->
-<!--                   <errors path="company"/>-->
-<!--                  </label>-->
-<!--                </div>-->
-
-<!--        <div>-->
-<!--            <label>Add number of invoice :-->
-<!--            <input path="invoiceNumber"/>-->
-<!--            <errors path="invoiceNumber"/>-->
-<!--            </label>-->
-<!--        </div>-->
-
-<!--        <div>-->
-<!--            <label datatype="dd/MM/yyyy">Enter date of invoice:-->
-<!--            <input path="date" type="date"/>-->
-<!--            <errors path="date"/>-->
-<!--            </label>-->
-<!--        </div>-->
-
-<!--        <div>-->
-<!--            <label>Select direction of invoice:-->
-<!--            <select path="invoiceDirection" items="${directions}" id="invoiceDirection" itemLabel="direction" itemValue="id"/>-->
-<!--            <errors path="invoiceDirection"/>-->
-<!--            </label>-->
-<!--        </div>-->
-
-<!--        <div>-->
-<!--            <label>Enter netto amount:-->
-<!--            <input path="amountNetto"/>-->
-<!--            <errors path="amountNetto"/>-->
-<!--            </label>-->
-<!--        </div>-->
-
-<!--        <div>-->
-<!--            <label>Choose the rate of tax-->
-<!--            <select path="vat" th:field="*{vat}" id="vat" th:textContent="${vat.percents}" th:value="${vat.id}"/>-->
-<!--            <errors path="vat"/>-->
-<!--            </label>-->
-<!--        </div>-->
-
-<!--        <div>-->
-<!--        <label>This your brutto amount:-->
-<!--        <input path="amountBrutto"/>-->
-<!--        <errors path="amountBrutto"/>-->
-<!--        </label>-->
-<!--        </div>-->
+<form method="post" th:object="${invoice}">
+    <!--                   <hidden path="company.id" th:field="*{company}" th:value="${company.id}"/>-->
 
 
+    <div>
+        <label for="invoiceNumber">Add number of invoice : </label>
+            <input id="invoiceNumber" type="text" th:field=*{invoiceNumber}/>
+            <errors path="invoiceNumber"/>
 
+    </div>
 
+    <div>
+        <label for="date" datatype="dd/MM/yyyy">Enter date of invoice:</label>
+            <input id="date" type="date" th:field="*{date}"/>
+            <errors path="date"/>
 
+    </div>
 
+    <div>
+        <label for="invoiceDirection">Select direction of invoice:</label>
+        <select th:field="*{invoiceDirection}" id="invoiceDirection">
+            <option value="">Nothing selected</option>
+            <option th:each="invoiceDirection: ${directions}" th:value="${invoiceDirection.id}"
+                    th:text="${invoiceDirection.direction}">
+            </option>
+        </select>
+        <errors path="invoiceDirection"/>
+    </div>
 
-<div>
-    <input type="submit" value="Add invoice">
-</div>
-<link rel="stylesheet" th:href="@{/css/style.css}">
+            <div>
+                <label for="amountNetto">Enter netto amount:</label>
+                <input id="amountNetto" th:field="*{amountNetto}" path="amountNetto"/>
+                <errors path="amountNetto"/>
+            </div>
+
+            <div>
+                <label for="vat">Choose the rate of tax:</label>
+                <select th:field="*{vat}" id="vat">
+                    <option value="">Select vat</option>
+                    <option th:each="vat:${vates}" th:text="${vat.percents}" th:value="${vat.id}">
+                    </option>
+                </select>
+                <errors path="vat"/>
+            </div>
+
+            <div>
+            <label for="amountBrutto">This is your brutto amount:</label>
+            <input id="amountBrutto" th:field="*{amountBrutto}"/>
+            <errors path="amountBrutto"/>
+
+            </div>
+
+    <br>
+    <div>
+        <input type="submit" value="Add invoice">
+    </div>
 </form>
 
+<script th:src="@{/js/counting.js}"></script>
 
 </body>
 </html>

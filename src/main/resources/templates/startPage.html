@@ -2,11 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
     <title>Count your taxes</title>
 </head>
 <body>
 
-Please select an option:
+<p>
+    Please select an option:
+</p>
 <table border="1">
     <thead>
     <th><a th:href="@{/admin/company/add}">Add company</a></th>
@@ -15,6 +18,5 @@ Please select an option:
 </table>
 
 
-<link rel="stylesheet" th:href="@{/css/style.css}">
 </body>
 </html>

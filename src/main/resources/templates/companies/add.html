@@ -2,52 +2,52 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
     <title>Create a new company</title>
 </head>
 <body>
 <div>
     <a th:href= "@{/}">Back to main menu</a>
 </div>
-<br>
-<div>
+<p>
     Please type your data:
-</div>
+</p>
 
 <form method="post" th:object="${company}">
 
     <br>
     <div>
-        <label>Company Name:
-        <input path="name" type="text" th:field="*{name}"/>
+        <label for="name">Company Name: </label>
+        <input id="name" type="text" th:field="*{name}"/>
         <errors path="name"/>
-        </label>
+
     </div>
 
     <div>
-        <label>Address:
-        <input path="address" type="text" th:field="*{address}"/>
+        <label for="address">Address:</label>
+        <input id="address" type="text" th:field="*{address}"/>
         <errors path="address"/>
-        </label>
+
     </div>
 
     <div>
-        <label>E-mail:
-        <input path="email" type="text" th:field="*{email}"/>
+        <label for="email">E-mail: </label>
+        <input id="email" type="text" th:field="*{email}"/>
         <errors path="email"/>
-        </label>
+
     </div>
 
     <div>
-        <label>NIP:
-        <input path="NIP" type="text" th:field="*{NIP}"/>
+        <label for="NIP">NIP:</label>
+        <input id="NIP" type="text" th:field="*{NIP}"/>
         <errors path="NIP"/>
-        </label>
+
     </div>
     <div>
-        <label>Bank Account:
-        <input path="bankAccount" type="text" th:field="*{bankAccount}"/>
+        <label for="bankAccount">Bank Account:</label>
+        <input id="bankAccount" type="text" th:field="*{bankAccount}"/>
         <errors path="bankAccount"/>
-        </label>
+
     </div>
 
       <div>
@@ -62,7 +62,6 @@
 
 
 </form>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
 
 
 </body>

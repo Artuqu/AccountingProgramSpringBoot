@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
     <title>Edit your company</title>
 </head>
 <body>
@@ -9,44 +10,46 @@
     <a th:href= "@{/admin/company/all}">Back to company list</a>
 </div>
 <br>
+<p>
 Enter new data:
+</p>
 
 
     <url var="edit_url" value="/admin/company/edit"/>
     <form method="post" th:object="${company}" th:action="${edit_url}">
         <hidden path="id" th:filed="*{id}"/>
         <div>
-            <label>Company Name:
-            <input path="name" type="text" th:field="*{name}"/>
+            <label for="name">Company Name:</label>
+            <input id="name" type="text" th:field="*{name}"/>
             <errors path="name"/>
-            </label>
+
         </div>
 
         <div>
-            <label>Address:
-                <input path="address" type="text" th:field="*{address}"/>
+            <label for="address">Address:</label>
+                <input id="address" type="text" th:field="*{address}"/>
                 <errors path="address"/>
-            </label>
+
         </div>
 
         <div>
-            <label>E-mail:
-                <input path="email" type="text" th:field="*{email}"/>
+            <label for="email">E-mail:</label>
+                <input id="email" type="text" th:field="*{email}"/>
                 <errors path="email"/>
-            </label>
+
         </div>
 
         <div>
-            <label>NIP:
-                <input path="NIP" type="text" th:field="*{NIP}"/>
+            <label for="NIP">NIP:</label>
+                <input id="NIP" type="text" th:field="*{NIP}"/>
                 <errors path="NIP"/>
-            </label>
+
         </div>
         <div>
-            <label>Bank Account:
-                <input path="bankAccount" type="text" th:field="*{bankAccount}"/>
+            <label for="bankAccount">Bank Account:</label>
+                <input id="bankAccount" type="text" th:field="*{bankAccount}"/>
                 <errors path="bankAccount"/>
-            </label>
+
         </div>
 
         <div>
@@ -65,6 +68,5 @@ Enter new data:
 
     </form>
 
-    <link rel="stylesheet" th:href="@{/css/style.css}">
 </body>
 </html>
