@@ -6,7 +6,7 @@
 </head>
 <body>
 <div>
-    <a href="http://localhost:8080" style="text-decoration:none">Back to main menu</a>
+    <a th:href="@{/}">Back to main menu</a>
 </div>
 <br>
 <div>This is the list of all companies allowed in program:</div>
@@ -37,14 +37,14 @@
 <td>
 
         <br>
-        <a href="http://localhost:8080/invoice/all/${company.id}" style="text-decoration: none">Show all invoice</a>
+        <a th:href="@{/invoice/all/} + ${company.id}">Show all invoice</a>
         <br>
-        <a href="http://localhost:8080/invoice/add/${company.id}" style="text-decoration: none">Add invoice</a>
+        <a th:href="@{/invoice/add/} + ${company.id}">Add invoice</a>
         <br>
-        <a href="http://localhost:8080/admin/company/edit/${company.id}" style="text-decoration: none">Edit
+        <a th:href="@{/admin/company/edit/} + ${company.id}">Edit
             Company</a>
         <br>
-        <a href="http://localhost:8080/admin/company/delete/${company.id}" style="text-decoration:none">Delete
+        <a th:href="@{/admin/company/delete/} + ${company.id}">Delete
             Company</a>
 </td>
 

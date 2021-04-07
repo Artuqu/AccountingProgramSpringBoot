@@ -26,6 +26,5 @@ public class Vat {
 
     private double value;
 
-    public Vat() {
-    }
+
 }

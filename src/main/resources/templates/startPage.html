@@ -9,9 +9,8 @@
 Please select an option:
 <table border="1">
     <thead>
-    <th><a href="http://localhost:8080/admin/company/add" style="text-decoration:none">Add company</a></th>
-    <th><a href="http://localhost:8080/admin/company/edit/{id}" style="text-decoration:none">Edit company</a></th>
-    <th><a href="http://localhost:8080/admin/company/all" style="text-decoration:none">Show all company</a></th>
+    <th><a th:href="@{/admin/company/add}">Add company</a></th>
+    <th><a th:href="@{/admin/company/all}">Show all company</a></th>
     </thead>
 </table>
 

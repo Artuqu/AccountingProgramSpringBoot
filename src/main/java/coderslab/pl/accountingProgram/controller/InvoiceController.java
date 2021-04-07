@@ -36,7 +36,7 @@ public class InvoiceController {
         jas.findCompany(id);
         List<Invoice> invoices = jas.findAllInvoices();
         m.addAttribute("invoices", invoices);
-        return "invoices/allInvoices";
+        return "invoices/all";
     }
 
     //add
@@ -44,25 +44,16 @@ public class InvoiceController {
     public String addInvoice(Model m, @PathVariable long id) {
         m.addAttribute("invoice", new Invoice());
         jas.findCompany(id);
-        return "invoices/addInvoice";
+        return "invoices/add";
     }
 
-//    @GetMapping("/add/{id}")
-//    public String addInvoice(Model m, @PathVariable long id) {
-//        cr.getOne(id);
-//        m.addAttribute("company", cr.getOne(id));
-//        m.addAttribute("invoice", new Invoice());
-//
-//        return "invoices/addInvoice";
-//    }
 
     @Transactional
     @PostMapping("/add/{id}")
-    public String addInvoicePost(@ModelAttribute("invoice") @Valid Invoice invoice, BindingResult result, Model m,  @PathVariable long id) {
+    public String addInvoicePost(@ModelAttribute("invoice") @Valid Invoice invoice, BindingResult result, Model m) {
         if (result.hasErrors()) {
-            return "invoices/addInvoice";
+            return "invoices/add";
         }
-        invoice.getCompany();
         this.jas.save(invoice);
         m.addAttribute("invoice", invoice);
 
@@ -98,7 +89,7 @@ public class InvoiceController {
     @GetMapping("edit/{id}")
     public String editCompany(@PathVariable long id, Model m) {
         m.addAttribute("invoice", jas.findInvoice(id));
-        return "invoices/editInvoices";
+        return "invoices/edit";
     }
 
 
@@ -123,25 +114,25 @@ public class InvoiceController {
     }
 
     //model for selling
-    @ModelAttribute("nettosSell")
-    public List<Invoice> netto(){return jas.getAllNettoSell();}
-
-    @ModelAttribute("bruttosSell")
-    public List<Invoice> brutto(){return jas.getAllBruttoSell();}
-
-    @ModelAttribute("allVatSell")
-    public List<Invoice> allVates(){return jas.getAllVatSell();}
-
-
-//    model for buying
-
-    @ModelAttribute("nettosBuy")
-    public List<Invoice> nettoBuy(){return jas.getAllNettoBuy();}
-
-    @ModelAttribute("bruttosBuy")
-    public List<Invoice> bruttoBuy(){return jas.getAllBruttoBuy();}
-
-    @ModelAttribute("allVatBuy")
-    public List<Invoice> allVatesBuy(){return jas.getAllVatBuy();}
+//    @ModelAttribute("nettosSell")
+//    public List<Invoice> netto(){return jas.getAllNettoSell();}
+//
+//    @ModelAttribute("bruttosSell")
+//    public List<Invoice> brutto(){return jas.getAllBruttoSell();}
+//
+//    @ModelAttribute("allVatSell")
+//    public List<Invoice> allVates(){return jas.getAllVatSell();}
+//
+//
+////    model for buying
+//
+//    @ModelAttribute("nettosBuy")
+//    public List<Invoice> nettoBuy(){return jas.getAllNettoBuy();}
+//
+//    @ModelAttribute("bruttosBuy")
+//    public List<Invoice> bruttoBuy(){return jas.getAllBruttoBuy();}
+//
+//    @ModelAttribute("allVatBuy")
+//    public List<Invoice> allVatesBuy(){return jas.getAllVatBuy();}
 
 }

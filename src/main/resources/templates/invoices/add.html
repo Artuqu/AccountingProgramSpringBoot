@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Adding new invoice</title>
+</head>
+<body>
+<div>
+    <a th:href= "@{/admin/company/all}">Back to company list</a>
+</div>
+<br>
+<div>
+    <b>Please enter your invoice:</b>
+</div>
+<br>
+
+    <form method="post" th:object="${invoice}">
+<!--              <div>-->
+<!--                  <label>Select company name or add new one-->
+<!--                   <select path="company" th:field="*{companies}" th:value="${company.id}" th:textContext="${company.name}" />-->
+<!--                   <errors path="company"/>-->
+<!--                  </label>-->
+<!--                </div>-->
+
+<!--        <div>-->
+<!--            <label>Add number of invoice :-->
+<!--            <input path="invoiceNumber"/>-->
+<!--            <errors path="invoiceNumber"/>-->
+<!--            </label>-->
+<!--        </div>-->
+
+<!--        <div>-->
+<!--            <label datatype="dd/MM/yyyy">Enter date of invoice:-->
+<!--            <input path="date" type="date"/>-->
+<!--            <errors path="date"/>-->
+<!--            </label>-->
+<!--        </div>-->
+
+<!--        <div>-->
+<!--            <label>Select direction of invoice:-->
+<!--            <select path="invoiceDirection" items="${directions}" id="invoiceDirection" itemLabel="direction" itemValue="id"/>-->
+<!--            <errors path="invoiceDirection"/>-->
+<!--            </label>-->
+<!--        </div>-->
+
+<!--        <div>-->
+<!--            <label>Enter netto amount:-->
+<!--            <input path="amountNetto"/>-->
+<!--            <errors path="amountNetto"/>-->
+<!--            </label>-->
+<!--        </div>-->
+
+<!--        <div>-->
+<!--            <label>Choose the rate of tax-->
+<!--            <select path="vat" th:field="*{vat}" id="vat" th:textContent="${vat.percents}" th:value="${vat.id}"/>-->
+<!--            <errors path="vat"/>-->
+<!--            </label>-->
+<!--        </div>-->
+
+<!--        <div>-->
+<!--        <label>This your brutto amount:-->
+<!--        <input path="amountBrutto"/>-->
+<!--        <errors path="amountBrutto"/>-->
+<!--        </label>-->
+<!--        </div>-->
+
+
+
+
+
+
+
+<div>
+    <input type="submit" value="Add invoice">
+</div>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</form>
+
+
+</body>
+</html>
