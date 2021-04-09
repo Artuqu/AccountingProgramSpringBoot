@@ -23,7 +23,7 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Company company;
 
     @NotBlank
@@ -39,11 +39,10 @@ public class Invoice {
     private double amountNetto;
 
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @OneToOne
     private Vat vat;
 
     private double amountBrutto;
-
 
 
 }

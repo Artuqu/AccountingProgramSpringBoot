@@ -1,6 +1,6 @@
 package coderslab.pl.accountingProgram.controller;
 
-
+import org.springframework.web.servlet.ModelAndView;
 import coderslab.pl.accountingProgram.entity.Company;
 import coderslab.pl.accountingProgram.entity.Invoice;
 import coderslab.pl.accountingProgram.entity.InvoiceDirection;
@@ -11,15 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
 
-
 @Controller
-//@SessionScope
 @RequestMapping("invoice")
 public class InvoiceController {
 
@@ -30,30 +25,29 @@ public class InvoiceController {
 
         this.jas=jas;
     }
-
+//to tutaj muszę zmienić kod by dopasował invoice do company
     @GetMapping("/all/{id}")
     public String showInvoices(Model m, @PathVariable long id) {
         jas.findCompany(id);
-        List<Invoice> invoices = jas.findAllInvoices();
-        m.addAttribute("invoices", invoices);
+        m.addAttribute("invoices", jas.findAllInvoices());
         return "invoices/all";
     }
 
     //add
     @GetMapping("/add/{id}")
-    public String addInvoice(Model m, @PathVariable long id) {
+    public String addInvoice(Model m) {
         m.addAttribute("invoice", new Invoice());
-        jas.findCompany(id);
         return "invoices/add";
     }
 
 
-    @Transactional
+
     @PostMapping("/add/{id}")
-    public String addInvoicePost(@ModelAttribute("invoice") @Valid Invoice invoice, BindingResult result, Model m) {
+    public String addInvoicePost(@ModelAttribute("invoice") @Valid Invoice invoice, BindingResult result, Model m,  @PathVariable long id) {
         if (result.hasErrors()) {
             return "invoices/add";
         }
+        invoice.setCompany(invoice.getCompany());
         this.jas.save(invoice);
         m.addAttribute("invoice", invoice);
 
@@ -76,14 +70,12 @@ public class InvoiceController {
 //        List<Invoice> netto = ir.findAllAmountNetto(amountNetto) }
 ;
     //delete
-    @Transactional
     @GetMapping("delete/{id}")
     public String deleteInvoice(@PathVariable long id) {
         this.jas.deleteInvoice(id);
         return "invoices/deleted";
     }
 
-    //edit
 
     //edit
     @GetMapping("edit/{id}")
@@ -95,9 +87,9 @@ public class InvoiceController {
 
     @PostMapping("edit")
     public String editInvoice(@ModelAttribute("invoice") @Valid Invoice invoice, BindingResult result, Model m) {
-//        if (result.hasErrors()) {
-//            return "invoices/editInvoices";
-//        }
+        if (result.hasErrors()) {
+            return "invoices/edit";
+        }
         Invoice one = jas.findInvoice(invoice.getId());
                 one.setDate(invoice.getDate());
                 one.setInvoiceNumber(invoice.getInvoiceNumber());

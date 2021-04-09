@@ -1,4 +1,5 @@
 package coderslab.pl.accountingProgram.service;
+
 import coderslab.pl.accountingProgram.entity.Company;
 import coderslab.pl.accountingProgram.entity.Invoice;
 import coderslab.pl.accountingProgram.entity.InvoiceDirection;
@@ -7,11 +8,15 @@ import coderslab.pl.accountingProgram.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 import java.util.List;
 
+
+@Transactional
 @Primary
 @Repository
 public class JpaAccountingService implements AccountingService {
@@ -20,15 +25,18 @@ public class JpaAccountingService implements AccountingService {
     public InvoiceRepository ir;
     public InvoiceDirectionRepository idr;
     public VatRepository vr;
+    @PersistenceContext
+    private EntityManager em;
 
     @Autowired
     JpaAccountingService(CompanyRepository cr,
-            InvoiceRepository ir,
-            InvoiceDirectionRepository idr, VatRepository vr){
-        this.cr =cr;
-        this.ir=ir;
-        this.idr=idr;
-        this.vr=vr;
+                         InvoiceRepository ir, EntityManager em,
+                         InvoiceDirectionRepository idr, VatRepository vr) {
+        this.cr = cr;
+        this.ir = ir;
+        this.idr = idr;
+        this.vr = vr;
+        this.em = em;
     }
 
 
@@ -43,7 +51,9 @@ public class JpaAccountingService implements AccountingService {
     }
 
     @Override
-    public List<Vat> findAllVates() { return vr.findAll(); }
+    public List<Vat> findAllVates() {
+        return vr.findAll();
+    }
 
     @Override
     public List<InvoiceDirection> findAllDirections() {
@@ -66,19 +76,20 @@ public class JpaAccountingService implements AccountingService {
     }
 
     @Override
-    public long deleteCompany(long id) {
-        return cr.deleteCompanyById(id);
+    public void deleteCompany(Long id) {
+        cr.deleteById(id);
     }
 
     @Override
-    public long deleteVat(long id) {
-        return vr.deleteVatById(id);
+    public void deleteVat(Long id) {
+        vr.deleteById(id);
     }
 
     @Override
-    public long deleteInvoice(long id) {
-        return ir.deleteInvoiceById(id);
+    public void deleteInvoice(Long id) {
+        ir.deleteById(id);
     }
+
 
     @Override
     public Company findCompany(Long id) {
@@ -89,10 +100,6 @@ public class JpaAccountingService implements AccountingService {
     public Invoice findInvoice(Long id) {
         return ir.getOne(id);
     }
-
-
-    @PersistenceContext
-    private EntityManager em;
 
 
     //selling

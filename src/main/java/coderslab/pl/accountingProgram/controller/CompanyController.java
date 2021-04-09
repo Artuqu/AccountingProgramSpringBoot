@@ -6,10 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.util.List;
+
 
 
 @Controller
@@ -28,9 +26,7 @@ public class CompanyController {
 
     @GetMapping("/all")
     public String showCompanies(Model m) {
-
-        List<Company> companies = jas.findAllCompanies();
-        m.addAttribute("companies", companies);
+        m.addAttribute("companies", jas.findAllCompanies());
         return "companies/all";
     }
 
@@ -41,7 +37,6 @@ public class CompanyController {
         return "companies/add";
     }
 
-    @Transactional
     @PostMapping("/add")
     public String addCompanyPost(@ModelAttribute("company") @Valid Company company, BindingResult result, Model m) {
         if (result.hasErrors()) {
@@ -80,7 +75,6 @@ public class CompanyController {
 
 
     //delete
-    @Transactional
     @GetMapping("delete/{id}")
     public String deleteCompany(@PathVariable long id) {
         this.jas.deleteCompany(id);

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/style.css}">
@@ -38,7 +38,7 @@
         <td>
 
             <br>
-            <a th:href="@{/invoice/all/} + ${company.id}">Show all invoice</a>
+            <a th:href="@{/invoice/all/} + ${company.id}">Show all invoices</a>
             <br>
             <a th:href="@{/invoice/add/} + ${company.id}">Add invoice</a>
             <br>

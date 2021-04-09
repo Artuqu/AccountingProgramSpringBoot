@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Adding new invoice</title>
@@ -16,25 +16,33 @@
 <br>
 
 <form method="post" th:object="${invoice}">
-    <!--                   <hidden path="company.id" th:field="*{company}" th:value="${company.id}"/>-->
+<!--    <input type="hidden" id="company.id" th:field="*{company}"-->
+<!--             th:value="${company}"/>-->
+
+        <label for="company">Select company : </label>
+    <select  th:field="*{company}" id="company">
+        <option th:each="company : ${companies}" th:value="${company.id}" th:text="${company.name}">
+        </option>
+    </select>
+
 
 
     <div>
         <label for="invoiceNumber">Add number of invoice : </label>
-            <input id="invoiceNumber" type="text" th:field=*{invoiceNumber}/>
-            <errors path="invoiceNumber"/>
+        <input id="invoiceNumber" type="text" th:field="*{invoiceNumber}"/>
+        <errors path="invoiceNumber"/>
 
     </div>
 
     <div>
-        <label for="date" datatype="dd/MM/yyyy">Enter date of invoice:</label>
-            <input id="date" type="date" th:field="*{date}"/>
-            <errors path="date"/>
+        <label for="date" datatype="dd/MM/yyyy">Enter date of invoice : </label>
+        <input id="date" type="date" th:field="*{date}"/>
+        <errors path="date"/>
 
     </div>
 
     <div>
-        <label for="invoiceDirection">Select direction of invoice:</label>
+        <label for="invoiceDirection">Select direction of invoice : </label>
         <select th:field="*{invoiceDirection}" id="invoiceDirection">
             <option value="">Nothing selected</option>
             <option th:each="invoiceDirection: ${directions}" th:value="${invoiceDirection.id}"
@@ -44,28 +52,28 @@
         <errors path="invoiceDirection"/>
     </div>
 
-            <div>
-                <label for="amountNetto">Enter netto amount:</label>
-                <input id="amountNetto" th:field="*{amountNetto}" path="amountNetto"/>
-                <errors path="amountNetto"/>
-            </div>
+    <div>
+        <label for="amountNetto">Enter netto amount : </label>
+        <input id="amountNetto" th:field="*{amountNetto}"/>
+        <errors path="amountNetto"/>
+    </div>
 
-            <div>
-                <label for="vat">Choose the rate of tax:</label>
-                <select th:field="*{vat}" id="vat">
-                    <option value="">Select vat</option>
-                    <option th:each="vat:${vates}" th:text="${vat.percents}" th:value="${vat.id}">
-                    </option>
-                </select>
-                <errors path="vat"/>
-            </div>
+    <div>
+        <label for="vat">Choose the rate of tax : </label>
+        <select th:field="*{vat}" id="vat">
+            <option value="">Select vat</option>
+            <option th:each="vat:${vates}" th:text="${vat.percents}" th:value="${vat.id}">
+            </option>
+        </select>
+        <errors path="vat"/>
+    </div>
 
-            <div>
-            <label for="amountBrutto">This is your brutto amount:</label>
-            <input id="amountBrutto" th:field="*{amountBrutto}"/>
-            <errors path="amountBrutto"/>
+    <div>
+        <label for="amountBrutto">This is your brutto amount : </label>
+        <input id="amountBrutto" th:field="*{amountBrutto}"/>
+        <errors path="amountBrutto"/>
 
-            </div>
+    </div>
 
     <br>
     <div>

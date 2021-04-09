@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/style.css}">
@@ -15,9 +15,9 @@ Enter new data:
 </p>
 
 
-    <url var="edit_url" value="/admin/company/edit"/>
-    <form method="post" th:object="${company}" th:action="${edit_url}">
-        <hidden path="id" th:filed="*{id}"/>
+
+    <form method="post" th:object="${company}" th:action="${'/admin/company/edit'}">
+        <hidden id="id" th:filed="*{id}"/>
         <div>
             <label for="name">Company Name:</label>
             <input id="name" type="text" th:field="*{name}"/>

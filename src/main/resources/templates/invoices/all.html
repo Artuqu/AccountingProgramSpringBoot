@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoices Database</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div>
+    <a th:href="@{/admin/company/all}">Back to company list</a>
+</div>
+<br>
+
+<div>There are all invoiced for your company:</div>
+<br>
+<table border="5" color="blue">
+
+    <thead>
+    <th>Lp.</th>
+    <th>Number</th>
+    <th>Company name</th>
+    <th>Date</th>
+    <th>Direction</th>
+    <th>Netto</th>
+    <th>Vat</th>
+    <th>Brutto</th>
+    <th>Action</th>
+
+    </thead>
+
+    <tbody>
+
+    <tr th:each="invoice: ${invoices}">
+
+        <td th:text="${invoice.id}"></td>
+        <td th:text="${invoice.invoiceNumber}"></td>
+        <td th:text="${invoice.company.name}"></td>
+        <td th:text="${invoice.date}"></td>
+        <td th:text="${invoice.invoiceDirection.direction}"></td>
+        <td th:text="${invoice.amountNetto}"></td>
+        <td th:text="${invoice.vat.percents}"></td>
+        <td th:text="${invoice.amountBrutto}"></td>
+        <td>
+            <br><a th:href="@{/invoice/delete/} + ${invoice.id}">Delete</a>
+            <br><a th:href="@{/invoice/edit/} + ${invoice.id}">Edit</a>
+        </td>
+    </tr>
+
+
+    </tbody>
+
+</table>
+
+<!--selling view-->
+<br>
+<table border="3">
+
+    <th>
+        Here is count of your sell invoices
+    </th>
+
+
+</table>
+<table border="3">
+    <thead>
+    <th>Total of brutto</th>
+    <th>Total of netto</th>
+    <th>Total of vat</th>
+
+    </thead>
+
+    <tbody>
+    <tr th:each="bruttosSell : ${bruttosSell}">
+        <td th:text="${bruttosSell}"></td>
+    </tr>
+
+    <tr th:each="nettosSell : ${nettosSell}">
+        <td th:text="${nettosSell}"></td>
+    </tr>
+
+    <tr th:each="allVatSell : ${allVatSell}">
+        <td th:text="${allVatSell}"></td>
+    </tr>
+
+    </tbody>
+</table>
+
+
+<!--buying view-->
+<br>
+<table border="3">
+
+    <th>
+        Here is count of your buy invoices
+    </th>
+
+
+</table>
+<table border="3">
+    <thead>
+    <th>Total of brutto</th>
+    <th>Total of netto</th>
+    <th>Total of vat</th>
+
+    </thead>
+
+    <tbody>
+    <tr th:each="bruttosBuy : ${bruttosBuy}">
+        <td th:text="${bruttosBuy}"></td>
+    </tr>
+    <tr th:each="nettosBuy : ${nettosBuy}">
+        <td th:text="${nettosBuy}"></td>
+    </tr>
+    <tr th:each="allVatBuy : ${allVatBuy}">
+        <td th:text="${allVatBuy}"></td>
+    </tr>
+
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice edited successful</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<p>
+Your invoice was edited.
+</p>
+<a th:each="company : ${companies}">
+    <br><a href="@{/admin/company/all}">Back to all company list</a>
+</a>
+
+
+</body>
+</html>

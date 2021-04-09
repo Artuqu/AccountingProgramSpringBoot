@@ -9,6 +9,9 @@ import org.hibernate.validator.constraints.pl.NIP;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.List;
+
+import static javax.persistence.CascadeType.REMOVE;
 
 @Getter
 @Setter
@@ -40,11 +43,6 @@ public class Company {
     @Size(min = 26, max = 26)
     private String bankAccount;
 
-//    @OneToMany(fetch = FetchType.EAGER)// rozwiązanie problemu z brakiem sesji
-//    private List<Invoice> invoices;
-
-
-
-
-
+    @OneToMany(cascade = REMOVE, mappedBy = "id")
+    private List<Invoice> invoice;
 }
