@@ -1,6 +1,4 @@
 package coderslab.pl.accountingProgram.controller;
-
-import org.springframework.web.servlet.ModelAndView;
 import coderslab.pl.accountingProgram.entity.Company;
 import coderslab.pl.accountingProgram.entity.Invoice;
 import coderslab.pl.accountingProgram.entity.InvoiceDirection;
@@ -25,11 +23,19 @@ public class InvoiceController {
 
         this.jas=jas;
     }
-//to tutaj muszę zmienić kod by dopasował invoice do company
+
     @GetMapping("/all/{id}")
     public String showInvoices(Model m, @PathVariable long id) {
-        jas.findCompany(id);
-        m.addAttribute("invoices", jas.findAllInvoices());
+        m.addAttribute("invoices", jas.findInvoicesView(id));
+        m.addAttribute("bruttosSell", jas.getAllBruttoSell());
+        m.addAttribute("nettosSell", jas.getAllNettoSell());
+//        m.addAttribute("allVatSell", jas.getAllVatSell());
+
+        m.addAttribute("bruttosBuy", jas.getAllBruttoBuy());
+        m.addAttribute("nettosBuy", jas.getAllNettoBuy());
+//        m.addAttribute("allVatBuy", jas.getAllVatBuy());
+
+
         return "invoices/all";
     }
 
@@ -43,11 +49,11 @@ public class InvoiceController {
 
 
     @PostMapping("/add/{id}")
-    public String addInvoicePost(@ModelAttribute("invoice") @Valid Invoice invoice, BindingResult result, Model m,  @PathVariable long id) {
+    public String addInvoicePost(@ModelAttribute("invoice") @Valid Invoice invoice, BindingResult result, Model m) {
         if (result.hasErrors()) {
             return "invoices/add";
         }
-        invoice.setCompany(invoice.getCompany());
+//        invoice.setCompany(invoice.getCompany());
         this.jas.save(invoice);
         m.addAttribute("invoice", invoice);
 
@@ -65,10 +71,7 @@ public class InvoiceController {
     @ModelAttribute("directions")
     public List<InvoiceDirection> directions(){return jas.findAllDirections();}
 
-//    @ModelAttribute("netto")
-//    public List<Invoice> netto(@PathVariable double amountNetto) {
-//        List<Invoice> netto = ir.findAllAmountNetto(amountNetto) }
-;
+
     //delete
     @GetMapping("delete/{id}")
     public String deleteInvoice(@PathVariable long id) {
@@ -98,33 +101,10 @@ public class InvoiceController {
                 one.setAmountBrutto(invoice.getAmountBrutto());
                 one.setVat(invoice.getVat());
 
-
-
         this.jas.save(one);
         m.addAttribute("invoice", one);
         return "invoices/success";
     }
 
-    //model for selling
-//    @ModelAttribute("nettosSell")
-//    public List<Invoice> netto(){return jas.getAllNettoSell();}
-//
-//    @ModelAttribute("bruttosSell")
-//    public List<Invoice> brutto(){return jas.getAllBruttoSell();}
-//
-//    @ModelAttribute("allVatSell")
-//    public List<Invoice> allVates(){return jas.getAllVatSell();}
-//
-//
-////    model for buying
-//
-//    @ModelAttribute("nettosBuy")
-//    public List<Invoice> nettoBuy(){return jas.getAllNettoBuy();}
-//
-//    @ModelAttribute("bruttosBuy")
-//    public List<Invoice> bruttoBuy(){return jas.getAllBruttoBuy();}
-//
-//    @ModelAttribute("allVatBuy")
-//    public List<Invoice> allVatesBuy(){return jas.getAllVatBuy();}
 
 }

@@ -1,10 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Edit your invoice</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
 </head>
 <body>
+
+<form method="post" th:object="${invoice}" th:action="@{'/invoice/edit'}">
+    <hidden id="id"/>
+
+
+
+        <div>
+            <label for="invoiceNumber">Enter new invoice number:</label>
+            <input id="invoiceNumber" th:field="*{invoiceNumber}" type="text"/>
+            <errors path="invoiceNumber"/>
+        </div>
+
+        <div>
+            <label for="date" datatype="dd/MM/yyyy">Enter new date:</label>
+            <input id="date" type="date" th:field="*{date}"/>
+            <errors path="date"/>
+        </div>
+
+        <div>
+            <label for="invoiceDirection">Select new direction:</label>
+            <select th:field="*{direction}" id="invoiceDirection">
+                <option th:each="direction : ${directions}" th:text="${direction.invoiceDirection}"
+                        th:value="${invoiceDirection.id}"></option>
+            </select>
+            <errors path="invoiceDirection"/>
+        </div>
+
+        <div>
+            <label for="amountNetto">Enter new amount netto:</label>
+            <input id="amountNetto" th:field="*{amountNetto}"/>
+            <errors path="amountNetto"/>
+        </div>
+
+        <div>
+            <label for="vat">Select new rate of vat:</label>
+            <select id="vat" th:field="*{vat}">
+                <option th:each="vat : ${vates}" th:text="${vat.percents}" th:value="${vat.id}"></option>
+
+            </select>
+            <errors path="vat"/>
+        </div>
+
+        <div>
+            <label for="amountBrutto">Enter new amount brutto:</label>
+            <form id="amountBrutto" th:field="*{amountBrutto}"/>
+            <errors path="amountBrutto"/>
+        </div>
+
+
+        <br>
+        <div>
+            <input type="submit" value="Edit invoice">
+        </div>
+
+</form>
+<script th:src="@{/js/counting.js}"></script>
+
 
 </body>
 </html>

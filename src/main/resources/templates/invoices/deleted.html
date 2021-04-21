@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Deleted</title>
-  <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 
 </head>
 <body>
 <p>
-Your invoice was deleted.
+    Your invoice was deleted.
 </p>
 <a th:each="company :${companies}">
-  <br><a th:href="@{/invoice/all/} + ${company.id}">Show all invoices</a>
+    <br><a th:href="@{/invoice/all/} + ${company.id}">Show all invoices</a>
 </a>
 </body>
 </html>

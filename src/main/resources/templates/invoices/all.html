@@ -70,15 +70,17 @@
     </thead>
 
     <tbody>
-    <tr th:each="bruttosSell : ${bruttosSell}">
+
+
+    <tr>
         <td th:text="${bruttosSell}"></td>
-    </tr>
 
-    <tr th:each="nettosSell : ${nettosSell}">
+
+
         <td th:text="${nettosSell}"></td>
-    </tr>
 
-    <tr th:each="allVatSell : ${allVatSell}">
+
+
         <td th:text="${allVatSell}"></td>
     </tr>
 
@@ -105,13 +107,13 @@
     </thead>
 
     <tbody>
-    <tr th:each="bruttosBuy : ${bruttosBuy}">
+    <tr>
         <td th:text="${bruttosBuy}"></td>
-    </tr>
-    <tr th:each="nettosBuy : ${nettosBuy}">
+
+
         <td th:text="${nettosBuy}"></td>
-    </tr>
-    <tr th:each="allVatBuy : ${allVatBuy}">
+
+
         <td th:text="${allVatBuy}"></td>
     </tr>
 

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 
 
+
 @Repository
 public interface VatRepository extends JpaRepository<Vat, Long> {
 

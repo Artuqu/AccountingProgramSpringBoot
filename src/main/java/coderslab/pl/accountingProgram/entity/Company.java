@@ -1,16 +1,12 @@
 package coderslab.pl.accountingProgram.entity;
-
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.Proxy;
 import org.hibernate.validator.constraints.pl.NIP;
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.List;
-
 import static javax.persistence.CascadeType.REMOVE;
 
 @Getter

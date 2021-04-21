@@ -1,11 +1,8 @@
 package coderslab.pl.accountingProgram.entity;
-
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.Proxy;
-
 import javax.persistence.*;
 import javax.transaction.Transactional;
 import javax.validation.constraints.NotBlank;
