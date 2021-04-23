@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -20,7 +21,6 @@ public class InvoiceController {
 
     @Autowired
     public InvoiceController(JpaAccountingService jas){
-
         this.jas=jas;
     }
 
@@ -29,11 +29,11 @@ public class InvoiceController {
         m.addAttribute("invoices", jas.findInvoicesView(id));
         m.addAttribute("bruttosSell", jas.getAllBruttoSell());
         m.addAttribute("nettosSell", jas.getAllNettoSell());
-//        m.addAttribute("allVatSell", jas.getAllVatSell());
+        m.addAttribute("allVatSell", jas.getAllVatSell());
 
         m.addAttribute("bruttosBuy", jas.getAllBruttoBuy());
         m.addAttribute("nettosBuy", jas.getAllNettoBuy());
-//        m.addAttribute("allVatBuy", jas.getAllVatBuy());
+        m.addAttribute("allVatBuy", jas.getAllVatBuy());
 
 
         return "invoices/all";
@@ -47,13 +47,12 @@ public class InvoiceController {
     }
 
 
-
+    @Transactional
     @PostMapping("/add/{id}")
     public String addInvoicePost(@ModelAttribute("invoice") @Valid Invoice invoice, BindingResult result, Model m) {
         if (result.hasErrors()) {
             return "invoices/add";
         }
-//        invoice.setCompany(invoice.getCompany());
         this.jas.save(invoice);
         m.addAttribute("invoice", invoice);
 
@@ -68,7 +67,7 @@ public class InvoiceController {
     @ModelAttribute("vates")
     public List<Vat> vates(){return jas.findAllVates();}
 
-    @ModelAttribute("directions")
+    @ModelAttribute("invoiceDirections")
     public List<InvoiceDirection> directions(){return jas.findAllDirections();}
 
 

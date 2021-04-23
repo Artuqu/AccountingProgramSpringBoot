@@ -9,7 +9,7 @@
 <body>
 
 <form method="post" th:object="${invoice}" th:action="@{'/invoice/edit'}">
-    <hidden id="id"/>
+    <input id="id" th:field="*{id}" type="hidden" />
 
 
 
@@ -27,8 +27,8 @@
 
         <div>
             <label for="invoiceDirection">Select new direction:</label>
-            <select th:field="*{direction}" id="invoiceDirection">
-                <option th:each="direction : ${directions}" th:text="${direction.invoiceDirection}"
+            <select th:field="*{invoiceDirection}" id="invoiceDirection">
+                <option th:each="invoiceDirection : ${invoiceDirections}" th:text="${invoiceDirection.direction}"
                         th:value="${invoiceDirection.id}"></option>
             </select>
             <errors path="invoiceDirection"/>
@@ -50,8 +50,8 @@
         </div>
 
         <div>
-            <label for="amountBrutto">Enter new amount brutto:</label>
-            <form id="amountBrutto" th:field="*{amountBrutto}"/>
+            <label for="amountBrutto">This is your new amount brutto:</label>
+            <input id="amountBrutto" th:field="*{amountBrutto}"/>
             <errors path="amountBrutto"/>
         </div>
 

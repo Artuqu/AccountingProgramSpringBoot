@@ -17,7 +17,7 @@ Enter new data:
 
 
     <form method="post" th:object="${company}" th:action="${'/admin/company/edit'}">
-        <hidden id="id" th:filed="*{id}"/>
+        <input id="id" th:field="*{id}" type="hidden"/>
         <div>
             <label for="name">Company Name:</label>
             <input id="name" type="text" th:field="*{name}"/>

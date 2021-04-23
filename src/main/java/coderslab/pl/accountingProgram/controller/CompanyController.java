@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 
@@ -75,6 +77,7 @@ public class CompanyController {
 
 
     //delete
+    @Transactional
     @GetMapping("delete/{id}")
     public String deleteCompany(@PathVariable long id) {
         this.jas.deleteCompany(id);

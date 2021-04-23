@@ -10,8 +10,8 @@
 <p>
     Your invoice was deleted.
 </p>
-<a th:each="company :${companies}">
-    <br><a th:href="@{/invoice/all/} + ${company.id}">Show all invoices</a>
+    <br><a
+            th:href="@{'/admin/company/all'}">Back to all company list
 </a>
 </body>
 </html>

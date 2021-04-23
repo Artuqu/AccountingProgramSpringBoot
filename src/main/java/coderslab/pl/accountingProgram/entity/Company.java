@@ -12,7 +12,7 @@ import static javax.persistence.CascadeType.REMOVE;
 @Getter
 @Setter
 @ToString
-@Proxy(lazy = false)// otwiera sesję i daje dostęp do bazy danych
+@Proxy(lazy = false)// rapid load of database
 @Entity
 @Table(name = "companies")
 public class Company {
@@ -24,12 +24,12 @@ public class Company {
     @NotBlank(message = "name can't be null!")
     private String name;
 
-    //notnull tylko dla obiektu
+    //notnull only fo object
     @NotBlank
     private String address;
 
     @Email(message = "enter a correct address")
-    @Column(unique = true)//daje unikatowy adres mailowy
+    @Column(unique = true)//unique e-mail address
     private String email;
 
     @NotBlank
@@ -39,6 +39,7 @@ public class Company {
     @Size(min = 26, max = 26)
     private String bankAccount;
 
-    @OneToMany(cascade = REMOVE, mappedBy = "id")
-    private List<Invoice> invoice;
+
+    @OneToMany(cascade = REMOVE, orphanRemoval = true, mappedBy = "company")// orphanRemoval is important for cascade deleting
+    private List<Invoice> invoices;
 }

@@ -19,6 +19,7 @@
 <!--    <input type="hidden" id="company.id" th:field="*{company}"-->
 <!--             th:value="${company}"/>-->
 
+
         <label for="company">Select company : </label>
     <select  th:field="*{company}" id="company">
         <option th:each="company : ${companies}" th:value="${company.id}" th:text="${company.name}">
@@ -45,7 +46,7 @@
         <label for="invoiceDirection">Select direction of invoice : </label>
         <select th:field="*{invoiceDirection}" id="invoiceDirection">
             <option value="">Nothing selected</option>
-            <option th:each="invoiceDirection: ${directions}" th:value="${invoiceDirection.id}"
+            <option th:each="invoiceDirection: ${invoiceDirections}" th:value="${invoiceDirection.id}"
                     th:text="${invoiceDirection.direction}">
             </option>
         </select>

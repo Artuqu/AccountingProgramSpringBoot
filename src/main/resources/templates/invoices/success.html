@@ -9,9 +9,7 @@
 <p>
 Your invoice was edited.
 </p>
-<a th:each="company : ${companies}">
-    <br><a href="@{/admin/company/all}">Back to all company list</a>
-</a>
+<a th:href="@{'/admin/company/all'}">Back to all company list</a>
 
 
 </body>

@@ -113,18 +113,18 @@ public class JpaAccountingService implements AccountingService {
 
 //    selling
     public Object getAllNettoSell() {
-        Query q = em.createQuery ( "Select coalesce(sum(i.amountNetto),0) from Invoice i WHERE i.invoiceDirection.id = 1" );
+        Query q = em.createQuery ( "Select Coalesce(Round(sum(i.amountNetto),2),0) from Invoice i WHERE i.invoiceDirection.id = 1" );
         return q.getSingleResult ();
     }
 
     public Object getAllBruttoSell() {
-        Query q = em.createQuery ( "Select coalesce(sum(i.amountBrutto),0) from Invoice i WHERE i.invoiceDirection.id = 1" );
+        Query q = em.createQuery ( "Select Coalesce(Round(sum(i.amountBrutto),2),0) from Invoice i WHERE i.invoiceDirection.id = 1");
         return q.getSingleResult ();
     }
 
 
     public Object getAllVatSell() {
-        Query q = em.createNativeQuery ( "select Round((select sum(amountBrutto) from Invoice WHERE invoiceDirection_id = 1) - (select sum(amountNetto) from Invoice  WHERE invoiceDirection_id = 1),2)" );
+        Query q = em.createNativeQuery ( "select (select Round(sum(amount_brutto),2) from Invoice WHERE invoice_direction_id = 1) - (select Round(sum(amount_netto),2) from Invoice  WHERE invoice_direction_id = 1)" );
         return q.getSingleResult ();
     }
 
@@ -132,18 +132,18 @@ public class JpaAccountingService implements AccountingService {
 //buying
 
     public Object getAllNettoBuy() {
-        Query q = em.createQuery ( "Select coalesce(sum(i.amountNetto),0) from Invoice i WHERE i.invoiceDirection.id = 2" );
+        Query q = em.createQuery ( "Select Coalesce(Round(sum(i.amountNetto),2),0) from Invoice i WHERE i.invoiceDirection.id = 2" );
         return q.getSingleResult ();
     }
 
     public Object getAllBruttoBuy() {
-        Query q = em.createQuery ( "Select coalesce(sum(i.amountBrutto),0) from Invoice i WHERE i.invoiceDirection.id = 2" );
+        Query q = em.createQuery ( "Select Coalesce(Round(sum(i.amountBrutto),2),0) from Invoice i WHERE i.invoiceDirection.id = 2" );
         return q.getSingleResult ();
     }
 
 
     public Object getAllVatBuy() {
-        Query q = em.createNativeQuery ( "Select Round((select sum(amountBrutto) from Invoice WHERE invoiceDirection_id = 2) - (select sum(amountNetto) from Invoice WHERE invoiceDirection_id = 2),2)" );
+        Query q = em.createNativeQuery ( "Select (select Round(sum(amount_brutto),2) from Invoice  WHERE invoice_direction_id = 2) - (select Round(sum(amount_netto),2) from Invoice   WHERE invoice_direction_id = 2)" );
         return q.getSingleResult ();
 
     }
