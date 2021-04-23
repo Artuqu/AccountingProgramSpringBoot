@@ -124,7 +124,7 @@ public class JpaAccountingService implements AccountingService {
 
 
     public Object getAllVatSell() {
-        Query q = em.createNativeQuery ( "select (select Round(sum(amount_brutto),2) from Invoice WHERE invoice_direction_id = 1) - (select Round(sum(amount_netto),2) from Invoice  WHERE invoice_direction_id = 1)" );
+        Query q = em.createNativeQuery ( "select Coalesce((select Round(sum(amount_brutto),2) from Invoice WHERE invoice_direction_id = 1) - (select Round(sum(amount_netto),2) from Invoice  WHERE invoice_direction_id = 1),0)" );
         return q.getSingleResult ();
     }
 
@@ -143,7 +143,7 @@ public class JpaAccountingService implements AccountingService {
 
 
     public Object getAllVatBuy() {
-        Query q = em.createNativeQuery ( "Select (select Round(sum(amount_brutto),2) from Invoice  WHERE invoice_direction_id = 2) - (select Round(sum(amount_netto),2) from Invoice   WHERE invoice_direction_id = 2)" );
+        Query q = em.createNativeQuery ( "Select Coalesce((select Round(sum(amount_brutto),2) from Invoice  WHERE invoice_direction_id = 2) - (select Round(sum(amount_netto),2) from Invoice   WHERE invoice_direction_id = 2),0)" );
         return q.getSingleResult ();
 
     }
