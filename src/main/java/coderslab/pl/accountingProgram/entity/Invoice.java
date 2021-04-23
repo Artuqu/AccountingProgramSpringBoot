@@ -2,6 +2,8 @@ package coderslab.pl.accountingProgram.entity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.validator.constraints.Range;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -19,24 +21,23 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-
     @ManyToOne
     private Company company;
 
-    @NotBlank
+    @NotBlank (message = "Please add an invoice number")
     private String invoiceNumber;
 
     @OneToOne
+    @NotNull (message = "Please select a direction")
     private InvoiceDirection invoiceDirection;
 
-    @NotBlank
+    @NotBlank (message = "Please select a date")
     private String date;
-
 
     private double amountNetto;
 
-    @NotNull
     @OneToOne
+    @NotNull(message = "Please choose value of vat")
     private Vat vat;
 
     private double amountBrutto;

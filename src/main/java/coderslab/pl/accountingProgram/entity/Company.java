@@ -21,22 +21,22 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotBlank(message = "name can't be null!")
+    @NotBlank(message = "name can't be null")
     private String name;
 
     //notnull only fo object
-    @NotBlank
+    @NotBlank(message = "address can't be null")
     private String address;
 
     @Email(message = "enter a correct address")
     @Column(unique = true)//unique e-mail address
     private String email;
 
-    @NotBlank
+    @NotBlank(message = "NIP can't be null")
     @NIP
     private String NIP;
 
-    @Size(min = 26, max = 26)
+    @Size(min = 26, max = 26, message = "Value has to have 26 numbers")
     private String bankAccount;
 
 

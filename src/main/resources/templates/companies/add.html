@@ -7,62 +7,59 @@
 </head>
 <body>
 <div>
-    <a th:href= "@{/}">Back to main menu</a>
+    <a th:href="@{/}">Back to main menu</a>
 </div>
 <p>
     Please type your data:
 </p>
 
-<form method="post" th:object="${company}">
+<form th:method="post" th:object="${company}">
 
     <br>
     <div>
         <label for="name">Company Name: </label>
         <input id="name" type="text" th:field="*{name}"/>
-        <errors path="name"/>
-
+        <span class="alert-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+            Companies Error
+        </span>
     </div>
 
     <div>
         <label for="address">Address:</label>
         <input id="address" type="text" th:field="*{address}"/>
-        <errors path="address"/>
-
+        <span class="alert-danger" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">
+            Companies Error
+        </span>
     </div>
 
     <div>
         <label for="email">E-mail: </label>
         <input id="email" type="text" th:field="*{email}"/>
-        <errors path="email"/>
-
+        <span class="alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+            Companies Error
+        </span>
     </div>
 
     <div>
         <label for="NIP">NIP:</label>
         <input id="NIP" type="text" th:field="*{NIP}"/>
-        <errors path="NIP"/>
+        <span class="alert-danger" th:if="${#fields.hasErrors('NIP')}" th:errors="*{NIP}">
+            Companies Error
+        </span>
 
     </div>
     <div>
         <label for="bankAccount">Bank Account:</label>
         <input id="bankAccount" type="text" th:field="*{bankAccount}"/>
-        <errors path="bankAccount"/>
-
+        <span class="alert-danger" th:if="${#fields.hasErrors('bankAccount')}" th:errors="*{bankAccount}">
+            Companies Error
+        </span>
     </div>
 
-      <div>
-         <errors path="*"/>
-      </div>
-<!--make mapping for errors-->
-
-    <br>
     <div>
         <input type="submit" value="Add company">
     </div>
-
-
 </form>
-
 
 </body>
 </html>

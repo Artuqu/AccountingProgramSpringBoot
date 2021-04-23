@@ -18,7 +18,6 @@ public class InvoiceDirection {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotBlank
     private String direction;
 
 }

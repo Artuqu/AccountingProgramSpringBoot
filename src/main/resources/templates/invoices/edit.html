@@ -8,21 +8,23 @@
 </head>
 <body>
 
-<form method="post" th:object="${invoice}" th:action="@{'/invoice/edit'}">
+<form th:method="post" th:object="${invoice}" th:action="@{'/invoice/edit'}">
     <input id="id" th:field="*{id}" type="hidden" />
-
-
 
         <div>
             <label for="invoiceNumber">Enter new invoice number:</label>
             <input id="invoiceNumber" th:field="*{invoiceNumber}" type="text"/>
-            <errors path="invoiceNumber"/>
+            <span class="alert-danger" th:if="${#fields.hasErrors('invoiceNumber')}" th:errors="*{invoiceNumber}">
+            Invoices Errors
+        </span>
         </div>
 
         <div>
             <label for="date" datatype="dd/MM/yyyy">Enter new date:</label>
             <input id="date" type="date" th:field="*{date}"/>
-            <errors path="date"/>
+            <span class="alert-danger" th:if="${#fields.hasErrors('date')}" th:errors="*{date}">
+            Invoices Errors
+        </span>
         </div>
 
         <div>
@@ -31,39 +33,43 @@
                 <option th:each="invoiceDirection : ${invoiceDirections}" th:text="${invoiceDirection.direction}"
                         th:value="${invoiceDirection.id}"></option>
             </select>
-            <errors path="invoiceDirection"/>
+            <span class="alert-danger" th:if="${#fields.hasErrors('invoiceDirection')}" th:errors="*{invoiceDirection}">
+            Invoices Errors
+        </span>
         </div>
 
         <div>
             <label for="amountNetto">Enter new amount netto:</label>
             <input id="amountNetto" th:field="*{amountNetto}"/>
-            <errors path="amountNetto"/>
+            <span class="alert-danger" th:if="${#fields.hasErrors('amountNetto')}" th:errors="*{amountNetto}">
+            Invoices Errors
+        </span>
         </div>
 
         <div>
             <label for="vat">Select new rate of vat:</label>
             <select id="vat" th:field="*{vat}">
                 <option th:each="vat : ${vates}" th:text="${vat.percents}" th:value="${vat.id}"></option>
-
             </select>
-            <errors path="vat"/>
+            <span class="alert-danger" th:if="${#fields.hasErrors('vat')}" th:errors="*{vat}">
+            Invoices Errors
+        </span>
         </div>
 
         <div>
             <label for="amountBrutto">This is your new amount brutto:</label>
             <input id="amountBrutto" th:field="*{amountBrutto}"/>
-            <errors path="amountBrutto"/>
+            <span class="alert-danger" th:if="${#fields.hasErrors('amountBrutto')}" th:errors="*{amountBrutto}">
+            Invoices Errors
+        </span>
         </div>
 
-
-        <br>
         <div>
             <input type="submit" value="Edit invoice">
         </div>
 
 </form>
 <script th:src="@{/js/counting.js}"></script>
-
 
 </body>
 </html>
