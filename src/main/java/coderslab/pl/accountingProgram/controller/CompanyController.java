@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -82,6 +81,7 @@ public class CompanyController {
     public String deleteCompany(@PathVariable long id) {
         this.jas.deleteCompany(id);
         return "redirect:../all";
+//        here I need code to confirmed the deletion
     }
 
 
