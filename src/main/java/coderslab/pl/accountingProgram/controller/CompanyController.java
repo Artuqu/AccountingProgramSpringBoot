@@ -10,19 +10,15 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 
-
 @Controller
 @RequestMapping("/admin/company")
 public class CompanyController {
 
     public final JpaAccountingService jas;
 
-
     @Autowired
     public CompanyController(JpaAccountingService jas) {
         this.jas = jas;
-
-
     }
 
     @GetMapping("/all")
@@ -45,7 +41,6 @@ public class CompanyController {
         }
         this.jas.save(company);
         m.addAttribute("company", company);
-
         return "redirect:all";
     }
 
@@ -55,7 +50,6 @@ public class CompanyController {
         m.addAttribute("company", jas.findCompany(id));
         return "companies/edit";
     }
-
 
     @PostMapping("edit")
     public String editInvoice(@ModelAttribute("company") @Valid Company company, BindingResult result, Model m) {
@@ -68,22 +62,26 @@ public class CompanyController {
         one.setBankAccount(company.getBankAccount());
         one.setEmail(company.getEmail());
         one.setNIP(company.getNIP());
-
         this.jas.save(one);
         m.addAttribute("company", one);
         return "redirect:all";
     }
 
-
     //delete
     @Transactional
     @GetMapping("delete/{id}")
-    public String deleteCompany(@PathVariable long id) {
+    public String deleteCompany(@ModelAttribute("company") @PathVariable long id, Model m) {
+        try {
+            this.jas.deleteCompany(id);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+            m.addAttribute("message", "Operation failed.");
+            return "delete";
+        }
         this.jas.deleteCompany(id);
         return "redirect:../all";
 //        here I need code to confirmed the deletion
     }
-
 
 }
 

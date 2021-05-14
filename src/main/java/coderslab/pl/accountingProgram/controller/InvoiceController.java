@@ -55,7 +55,6 @@ public class InvoiceController {
         }
         this.jas.save(invoice);
         m.addAttribute("invoice", invoice);
-
         return "redirect:../all/{id}";
     }
 
