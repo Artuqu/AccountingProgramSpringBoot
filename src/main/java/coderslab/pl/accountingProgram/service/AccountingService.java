@@ -11,7 +11,7 @@ import java.util.List;
 public interface AccountingService {
 
 List <Company> findAllCompanies ();
-List <Invoice> findAllInvoices ();
+List <Invoice> findAllInvoices (Long companyId);
 //List <Invoice> findInvoicesView ();
 List <Vat> findAllVates ();
 List <InvoiceDirection> findAllDirections ();
@@ -27,13 +27,13 @@ void deleteInvoice(Long invoiceId);
 Company findCompany (Long companyId);
 Invoice findInvoice (Long invoiceId);
 
-Object getAllVatSell();
-Object getAllVatBuy();
+Object getAllVatSell(Long companyId);
+Object getAllVatBuy(Long companyId);
 
-Object getNettoSell();
-Object getNettoBuy();
-Object getBruttoBuy();
-Object getBruttoSell();
+Object getNettoSell(Long companyId);
+Object getNettoBuy(Long companyId);
+Object getBruttoBuy(Long companyId);
+Object getBruttoSell(Long companyId);
 
 
 }

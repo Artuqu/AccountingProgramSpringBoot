@@ -48,8 +48,8 @@ public class JpaAccountingService implements AccountingService {
     }
 
     @Override
-    public List<Invoice> findAllInvoices() {
-        return ir.findAll();
+    public List<Invoice> findAllInvoices(Long companyId) {
+        return ir.findAllInvoicesByCompanyId(companyId);
     }
 
 //    @Override
@@ -110,36 +110,34 @@ public class JpaAccountingService implements AccountingService {
     }
 
 
-
-
     @Override
-    public Object getAllVatSell() {
-        return ir.allVatSell();
+    public Object getAllVatSell(Long id) {
+        return ir.allVatSell(id);
     }
 
     @Override
-    public Object getAllVatBuy() {
-        return ir.allVatBuy();
+    public Object getAllVatBuy(Long id) {
+        return ir.allVatBuy(id);
     }
 
     @Override
-    public Object getNettoSell() {
-        return ir.nettoSell();
+    public Object getNettoSell(Long id) {
+        return ir.nettoSell(id);
     }
 
     @Override
-    public Object getNettoBuy() {
-        return ir.nettoBuy();
+    public Object getNettoBuy(Long id) {
+        return ir.nettoBuy(id);
     }
 
     @Override
-    public Object getBruttoBuy() {
-        return ir.bruttoBuy();
+    public Object getBruttoBuy(Long id) {
+        return ir.bruttoBuy(id);
     }
 
     @Override
-    public Object getBruttoSell() {
-        return ir.bruttoSell();
+    public Object getBruttoSell(Long id) {
+        return ir.bruttoSell(id);
     }
 
 }

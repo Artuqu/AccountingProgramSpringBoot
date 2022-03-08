@@ -27,18 +27,18 @@ public class InvoiceController {
         this.jas = jas;
     }
 
-    @GetMapping("/all")
-    public ModelAndView showInvoices(ModelAndView mav) {
+    @GetMapping("/all/{id}")
+    public ModelAndView showInvoices(ModelAndView mav, @PathVariable long id) {
         mav.setViewName("invoices/all");
-        mav.addObject("invoices", jas.findAllInvoices());
+        mav.addObject("invoices", jas.findAllInvoices(id));
 
-        mav.addObject("bruttosSell", jas.getBruttoSell());
-        mav.addObject("nettosSell", jas.getNettoSell());
-        mav.addObject("allVatSell", jas.getAllVatSell());
+        mav.addObject("bruttosSell", jas.getBruttoSell(id));
+        mav.addObject("nettosSell", jas.getNettoSell(id));
+        mav.addObject("allVatSell", jas.getAllVatSell(id));
 
-        mav.addObject("bruttosBuy", jas.getBruttoBuy());
-        mav.addObject("nettosBuy", jas.getNettoBuy());
-        mav.addObject("allVatBuy", jas.getAllVatBuy());
+        mav.addObject("bruttosBuy", jas.getBruttoBuy(id));
+        mav.addObject("nettosBuy", jas.getNettoBuy(id));
+        mav.addObject("allVatBuy", jas.getAllVatBuy(id));
 
         return mav;
     }
@@ -61,7 +61,7 @@ public class InvoiceController {
         this.jas.save(invoice);
         m.addAttribute("invoice", invoice);
 
-        return "redirect:../all";
+        return "redirect:../all/{id}";
     }
 
 
