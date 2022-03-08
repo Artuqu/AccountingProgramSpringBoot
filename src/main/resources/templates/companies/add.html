@@ -2,12 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
     <title>Create a new company</title>
 </head>
 <body>
 <div>
-    <a th:href="@{/}">Back to main menu</a>
+    <a class="navigator" href="/">Back to main menu</a>
 </div>
 <p>
     Please type your data:
@@ -57,7 +57,7 @@
     </div>
 
     <div>
-        <input type="submit" value="Add company">
+        <input class="button" type="submit" value="Add company">
     </div>
 </form>
 

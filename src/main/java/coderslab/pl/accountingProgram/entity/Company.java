@@ -1,12 +1,16 @@
 package coderslab.pl.accountingProgram.entity;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.Proxy;
 import org.hibernate.validator.constraints.pl.NIP;
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.List;
+
 import static javax.persistence.CascadeType.REMOVE;
 
 @Getter
@@ -40,6 +44,6 @@ public class Company {
     private String bankAccount;
 
 
-    @OneToMany(cascade = REMOVE, orphanRemoval = true, mappedBy = "company")// orphanRemoval is important for cascade deleting
+    @OneToMany(cascade = REMOVE, fetch = FetchType.EAGER, mappedBy = "company")// orphanRemoval is important for cascade deleting
     private List<Invoice> invoices;
 }

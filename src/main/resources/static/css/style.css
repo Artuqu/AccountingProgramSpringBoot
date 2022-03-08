@@ -1,10 +1,44 @@
-a {
-    text-decoration: none;
-    color: black;
-    background-color: #5353ec;
-
+:root {
+    --primary-blue: #3452ff;
+    --secondary-blue: #0127ff;
 }
 
-p{
-font-weight: bold;
+.navigator {
+    text-decoration: none;
+    font-size: 1rem;
+    background-color: var(--primary-blue);
+    border: 1px solid var(--secondary-blue);
+    border-radius: 2px;
+    color: white;
+    padding: 1px 5px 1px 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.navigator:hover {
+    background-color: var(--secondary-blue);
+}
+
+p {
+    font-weight: bold;
+}
+
+div {
+    border-top: 3px solid white;
+}
+
+.button {
+    text-decoration: none;
+    font-size: 1rem;
+    background-color: var(--primary-blue);
+    border: 1px solid var(--secondary-blue);
+    border-radius: 2px;
+    color: white;
+    padding: 1px 5px 1px 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.button:hover {
+    background-color: var(--secondary-blue);
 }

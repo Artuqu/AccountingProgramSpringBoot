@@ -1,8 +1,8 @@
 package coderslab.pl.accountingProgram.entity;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -21,7 +21,7 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Company company;
 
     @NotBlank (message = "Please add an invoice number")

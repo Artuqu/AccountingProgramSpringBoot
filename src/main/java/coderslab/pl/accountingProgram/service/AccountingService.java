@@ -1,29 +1,39 @@
 package coderslab.pl.accountingProgram.service;
+
 import coderslab.pl.accountingProgram.entity.Company;
 import coderslab.pl.accountingProgram.entity.Invoice;
 import coderslab.pl.accountingProgram.entity.InvoiceDirection;
 import coderslab.pl.accountingProgram.entity.Vat;
+
 import java.util.List;
 
 
 public interface AccountingService {
 
-public List <Company> findAllCompanies ();
-public List <Invoice> findAllInvoices ();
-public List <Invoice> findInvoicesView (Long companyId);
-public List <Vat> findAllVates ();
-public List <InvoiceDirection> findAllDirections ();
+List <Company> findAllCompanies ();
+List <Invoice> findAllInvoices ();
+//List <Invoice> findInvoicesView ();
+List <Vat> findAllVates ();
+List <InvoiceDirection> findAllDirections ();
 
-public Company save (Company company);
-public Invoice save (Invoice invoice);
-public Vat save (Vat vat);
+Company save (Company company);
+Invoice save (Invoice invoice);
+Vat save (Vat vat);
 
-public void deleteCompany(Long companyId);
-public void deleteVat(Long id);
-public void deleteInvoice(Long invoiceId);
+void deleteCompany(Long companyId);
+void deleteVat(Long id);
+void deleteInvoice(Long invoiceId);
 
-public Company findCompany (Long companyId);
-public Invoice findInvoice (Long invoiceId);
+Company findCompany (Long companyId);
+Invoice findInvoice (Long invoiceId);
+
+Object getAllVatSell();
+Object getAllVatBuy();
+
+Object getNettoSell();
+Object getNettoBuy();
+Object getBruttoBuy();
+Object getBruttoSell();
 
 
 }

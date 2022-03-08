@@ -2,12 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
     <title>All companies</title>
 </head>
 <body>
 <div>
-    <a th:href="@{/}">Back to main menu</a>
+    <a class="navigator" href="/">Back to main menu</a>
 </div>
 <br>
 <p>This is the list of all companies allowed in program:</p>
@@ -37,16 +37,22 @@
 
         <td>
 
-            <br>
-            <a th:href="@{/invoice/all/} + ${company.id}">Show all invoices</a>
-            <br>
-            <a th:href="@{/invoice/add/} + ${company.id}">Add invoice</a>
-            <br>
-            <a th:href="@{/admin/company/edit/} + ${company.id}">Edit
-                Company</a>
-            <br>
-            <a th:href="@{/admin/company/delete/} + ${company.id}">Delete
-                Company</a>
+            <div>
+
+            <a class="navigator" th:href="@{/invoice/all}">Show all invoices</a>
+            </div>
+
+            <div>
+            <a class="navigator" th:href="@{/invoice/add/} + ${company.id}">Add invoice</a>
+            </div>
+
+            <div>
+            <a class="navigator" th:href="@{/admin/company/edit/} + ${company.id}">Edit Company</a>
+            </div>
+
+            <div>
+            <a class="navigator" th:href="@{/admin/company/delete/} + ${company.id}">Delete Company</a>
+            </div>
         </td>
 
 

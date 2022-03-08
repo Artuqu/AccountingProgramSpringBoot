@@ -1,4 +1,5 @@
 package coderslab.pl.accountingProgram.controller;
+
 import coderslab.pl.accountingProgram.entity.Company;
 import coderslab.pl.accountingProgram.entity.Invoice;
 import coderslab.pl.accountingProgram.entity.InvoiceDirection;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
@@ -20,23 +23,24 @@ public class InvoiceController {
     private final JpaAccountingService jas;
 
     @Autowired
-    public InvoiceController(JpaAccountingService jas){
-        this.jas=jas;
+    public InvoiceController(JpaAccountingService jas) {
+        this.jas = jas;
     }
 
-    @GetMapping("/all/{id}")
-    public String showInvoices(Model m, @PathVariable long id) {
-        m.addAttribute("invoices", jas.findInvoicesView(id));
-        m.addAttribute("bruttosSell", jas.getAllBruttoSell());
-        m.addAttribute("nettosSell", jas.getAllNettoSell());
-        m.addAttribute("allVatSell", jas.getAllVatSell());
+    @GetMapping("/all")
+    public ModelAndView showInvoices(ModelAndView mav) {
+        mav.setViewName("invoices/all");
+        mav.addObject("invoices", jas.findAllInvoices());
 
-        m.addAttribute("bruttosBuy", jas.getAllBruttoBuy());
-        m.addAttribute("nettosBuy", jas.getAllNettoBuy());
-        m.addAttribute("allVatBuy", jas.getAllVatBuy());
+        mav.addObject("bruttosSell", jas.getBruttoSell());
+        mav.addObject("nettosSell", jas.getNettoSell());
+        mav.addObject("allVatSell", jas.getAllVatSell());
 
+        mav.addObject("bruttosBuy", jas.getBruttoBuy());
+        mav.addObject("nettosBuy", jas.getNettoBuy());
+        mav.addObject("allVatBuy", jas.getAllVatBuy());
 
-        return "invoices/all";
+        return mav;
     }
 
     //add
@@ -56,19 +60,24 @@ public class InvoiceController {
         this.jas.save(invoice);
         m.addAttribute("invoice", invoice);
 
-        return "redirect:../all/{id}";
+        return "redirect:../all";
     }
 
 
-
     @ModelAttribute("companies")
-    public List<Company> companies(){return jas.findAllCompanies();}
+    public List<Company> companies() {
+        return jas.findAllCompanies();
+    }
 
     @ModelAttribute("vates")
-    public List<Vat> vates(){return jas.findAllVates();}
+    public List<Vat> vates() {
+        return jas.findAllVates();
+    }
 
     @ModelAttribute("invoiceDirections")
-    public List<InvoiceDirection> directions(){return jas.findAllDirections();}
+    public List<InvoiceDirection> directions() {
+        return jas.findAllDirections();
+    }
 
 
     //delete
@@ -93,12 +102,12 @@ public class InvoiceController {
             return "invoices/edit";
         }
         Invoice one = jas.findInvoice(invoice.getId());
-                one.setDate(invoice.getDate());
-                one.setInvoiceNumber(invoice.getInvoiceNumber());
-                one.setInvoiceDirection(invoice.getInvoiceDirection());
-                one.setAmountNetto(invoice.getAmountNetto());
-                one.setAmountBrutto(invoice.getAmountBrutto());
-                one.setVat(invoice.getVat());
+        one.setDate(invoice.getDate());
+        one.setInvoiceNumber(invoice.getInvoiceNumber());
+        one.setInvoiceDirection(invoice.getInvoiceDirection());
+        one.setAmountNetto(invoice.getAmountNetto());
+        one.setAmountBrutto(invoice.getAmountBrutto());
+        one.setVat(invoice.getVat());
 
         this.jas.save(one);
         m.addAttribute("invoice", one);

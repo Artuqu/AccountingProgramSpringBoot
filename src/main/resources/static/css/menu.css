@@ -1,0 +1,36 @@
+:root {
+    --main-color: #68bd45;
+    --secondary-main: #68bd80;
+}
+
+body {
+    margin: 0;
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--main-color);
+    justify-content: flex-end;
+}
+
+.menu-element {
+    padding: 10px 5px 10px 5px;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+
+.menu-separator-v {
+    border-left: 2px solid white;
+}
+
+.link {
+    text-decoration: none;
+    font-size: 1rem;
+    background-color: var(--main-color);
+    border: 1px solid var(--secondary-main);
+    border-radius: 2px;
+    color: white;
+    padding: 1px 5px 1px 5px;
+}

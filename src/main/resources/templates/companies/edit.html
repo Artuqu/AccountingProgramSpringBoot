@@ -2,12 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
     <title>Edit your company</title>
 </head>
 <body>
 <div>
-    <a th:href="@{/admin/company/all}">Back to company list</a>
+    <a class="navigator" href="/admin/company/all">Back to company list</a>
 </div>
 <br>
 <p>
@@ -60,7 +60,7 @@
     </div>
 
     <div>
-        <input type="submit" value="Edit company">
+        <input class="button" type="submit" value="Edit company">
     </div>
 
 

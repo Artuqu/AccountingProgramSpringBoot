@@ -1,12 +1,16 @@
 package coderslab.pl.accountingProgram.service;
+
 import coderslab.pl.accountingProgram.entity.Company;
 import coderslab.pl.accountingProgram.entity.Invoice;
 import coderslab.pl.accountingProgram.entity.InvoiceDirection;
 import coderslab.pl.accountingProgram.entity.Vat;
-import coderslab.pl.accountingProgram.repository.*;
+import coderslab.pl.accountingProgram.repository.CompanyRepository;
+import coderslab.pl.accountingProgram.repository.InvoiceDirectionRepository;
+import coderslab.pl.accountingProgram.repository.InvoiceRepository;
+import coderslab.pl.accountingProgram.repository.VatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -15,20 +19,19 @@ import java.util.List;
 
 
 @Transactional
-@Primary
-@Repository
+@Service
 public class JpaAccountingService implements AccountingService {
 
-    public CompanyRepository cr;
-    public InvoiceRepository ir;
-    public InvoiceDirectionRepository idr;
-    public VatRepository vr;
+    CompanyRepository cr;
+    InvoiceRepository ir;
+    InvoiceDirectionRepository idr;
+    VatRepository vr;
     @PersistenceContext
     private EntityManager em;
 
     @Autowired
     JpaAccountingService(CompanyRepository cr,
-                         InvoiceRepository ir,EntityManager em,
+                         InvoiceRepository ir, EntityManager em,
                          InvoiceDirectionRepository idr, VatRepository vr) {
         this.cr = cr;
         this.ir = ir;
@@ -49,12 +52,10 @@ public class JpaAccountingService implements AccountingService {
         return ir.findAll();
     }
 
-    @Override
-    public List<Invoice> findInvoicesView(Long companyId) {
-        return ir.findAllInvoicesByCompanyId(companyId);
-    }
-
-
+//    @Override
+//    public List<Invoice> findInvoicesView(Long companyId) {
+//        return ir.findAllInvoicesByCompanyId(companyId);
+//    }
 
 
     @Override
@@ -111,41 +112,34 @@ public class JpaAccountingService implements AccountingService {
 
 
 
-//    selling
-    public Object getAllNettoSell() {
-        Query q = em.createQuery ( "Select Coalesce(Round(sum(i.amountNetto),2),0) from Invoice i WHERE i.invoiceDirection.id = 1" );
-        return q.getSingleResult ();
-    }
-
-    public Object getAllBruttoSell() {
-        Query q = em.createQuery ( "Select Coalesce(Round(sum(i.amountBrutto),2),0) from Invoice i WHERE i.invoiceDirection.id = 1");
-        return q.getSingleResult ();
-    }
-
-
+    @Override
     public Object getAllVatSell() {
-        Query q = em.createNativeQuery ( "select Coalesce((select Round(sum(amount_brutto),2) from Invoice WHERE invoice_direction_id = 1) - (select Round(sum(amount_netto),2) from Invoice  WHERE invoice_direction_id = 1),0)" );
-        return q.getSingleResult ();
+        return ir.allVatSell();
     }
 
-
-//buying
-
-    public Object getAllNettoBuy() {
-        Query q = em.createQuery ( "Select Coalesce(Round(sum(i.amountNetto),2),0) from Invoice i WHERE i.invoiceDirection.id = 2" );
-        return q.getSingleResult ();
-    }
-
-    public Object getAllBruttoBuy() {
-        Query q = em.createQuery ( "Select Coalesce(Round(sum(i.amountBrutto),2),0) from Invoice i WHERE i.invoiceDirection.id = 2" );
-        return q.getSingleResult ();
-    }
-
-
+    @Override
     public Object getAllVatBuy() {
-        Query q = em.createNativeQuery ( "Select Coalesce((select Round(sum(amount_brutto),2) from Invoice  WHERE invoice_direction_id = 2) - (select Round(sum(amount_netto),2) from Invoice   WHERE invoice_direction_id = 2),0)" );
-        return q.getSingleResult ();
+        return ir.allVatBuy();
+    }
 
+    @Override
+    public Object getNettoSell() {
+        return ir.nettoSell();
+    }
+
+    @Override
+    public Object getNettoBuy() {
+        return ir.nettoBuy();
+    }
+
+    @Override
+    public Object getBruttoBuy() {
+        return ir.bruttoBuy();
+    }
+
+    @Override
+    public Object getBruttoSell() {
+        return ir.bruttoSell();
     }
 
 }

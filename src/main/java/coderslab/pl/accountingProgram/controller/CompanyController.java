@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -26,9 +28,10 @@ public class CompanyController {
     }
 
     @GetMapping("/all")
-    public String showCompanies(Model m) {
-        m.addAttribute("companies", jas.findAllCompanies());
-        return "companies/all";
+    public ModelAndView showCompanies(ModelAndView mav) {
+        mav.setViewName("companies/all");
+        mav.addObject("companies", jas.findAllCompanies());
+        return mav;
     }
 
     //add
