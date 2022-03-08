@@ -25,13 +25,10 @@
     <th>Vat</th>
     <th>Brutto</th>
     <th>Action</th>
-
     </thead>
 
     <tbody>
-
     <tr th:each="invoice: ${invoices}">
-
         <td th:text="${invoice.id}"></td>
         <td th:text="${invoice.invoiceNumber}"></td>
         <td th:text="${invoice.company.name}"></td>
@@ -45,10 +42,7 @@
             <br><a th:href="@{/invoice/edit/} + ${invoice.id}">Edit</a>
         </td>
     </tr>
-
-
     </tbody>
-
 </table>
 
 <!--selling view-->
@@ -58,32 +52,20 @@
     <th>
         Here is count of your sell invoices
     </th>
-
-
 </table>
 <table border="3">
     <thead>
     <th>Total of brutto</th>
     <th>Total of netto</th>
     <th>Total of vat</th>
-
     </thead>
 
     <tbody>
-
-
     <tr>
         <td th:text="${bruttosSell}"></td>
-
-
-
         <td th:text="${nettosSell}"></td>
-
-
-
         <td th:text="${allVatSell}"></td>
     </tr>
-
     </tbody>
 </table>
 
@@ -95,25 +77,18 @@
     <th>
         Here is count of your buy invoices
     </th>
-
-
 </table>
 <table border="3">
     <thead>
     <th>Total of brutto</th>
     <th>Total of netto</th>
     <th>Total of vat</th>
-
     </thead>
 
     <tbody>
     <tr>
         <td th:text="${bruttosBuy}"></td>
-
-
         <td th:text="${nettosBuy}"></td>
-
-
         <td th:text="${allVatBuy}"></td>
     </tr>
 
