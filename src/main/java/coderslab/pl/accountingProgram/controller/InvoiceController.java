@@ -45,9 +45,10 @@ public class InvoiceController {
 
     //add
     @GetMapping("/add/{id}")
-    public String addInvoice(Model m) {
-        m.addAttribute("invoice", new Invoice());
-        return "invoices/add";
+    public ModelAndView addInvoice(ModelAndView mav) {
+        mav.addObject("invoice", new Invoice());
+        mav.setViewName("invoices/add");
+        return mav;
     }
 
 
