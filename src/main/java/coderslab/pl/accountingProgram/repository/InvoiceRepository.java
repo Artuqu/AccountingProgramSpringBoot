@@ -1,6 +1,5 @@
 package coderslab.pl.accountingProgram.repository;
 
-import coderslab.pl.accountingProgram.entity.Company;
 import coderslab.pl.accountingProgram.entity.Invoice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,14 +12,14 @@ import java.util.List;
 @Repository
 public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
 
-
     List<Invoice> findAllInvoicesByCompanyId(long id);
+    List<Invoice> deleteAllInvoicesByCompanyId(long id);
 
 
-    @Query(value = "SELECT Coalesce(sum(amount_brutto)-sum(amount_netto),0) FROM invoice WHERE invoice_direction_id = 1 AND company_id LIKE :id", nativeQuery = true)
+    @Query(value = "SELECT Coalesce(Round(sum(amount_brutto)-sum(amount_netto),2),0) FROM invoice WHERE invoice_direction_id = 1 AND company_id LIKE :id", nativeQuery = true)
     Object allVatSell(@Param("id") Long id);
 
-    @Query(value = "SELECT Coalesce(sum(amount_brutto)-sum(amount_netto),0) FROM invoice WHERE invoice_direction_id = 2 AND company_id LIKE :id", nativeQuery = true)
+    @Query(value = "SELECT Coalesce(Round(sum(amount_brutto)-sum(amount_netto),2),0) FROM invoice WHERE invoice_direction_id = 2 AND company_id LIKE :id", nativeQuery = true)
     Object allVatBuy(@Param("id") Long id);
 
 

@@ -21,7 +21,7 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Company company;
 
     @NotBlank (message = "Please add an invoice number")

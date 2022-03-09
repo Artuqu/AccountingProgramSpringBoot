@@ -5,20 +5,18 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.Proxy;
 import org.hibernate.validator.constraints.pl.NIP;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.List;
 
-import static javax.persistence.CascadeType.REMOVE;
-
 @Getter
 @Setter
 @ToString
 @Proxy(lazy = false)// rapid load of database
 @Entity
-@Table(name = "companies")
 public class Company {
 
     @Id
@@ -43,7 +41,7 @@ public class Company {
     @Size(min = 26, max = 26, message = "Value has to have 26 numbers")
     private String bankAccount;
 
-
-    @OneToMany(cascade = REMOVE, fetch = FetchType.EAGER, mappedBy = "company")// orphanRemoval is important for cascade deleting
+    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.REMOVE)
+// orphanRemoval is important for cascade deleting
     private List<Invoice> invoices;
 }

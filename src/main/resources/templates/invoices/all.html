@@ -18,7 +18,6 @@
     <thead>
     <th>Lp.</th>
     <th>Number</th>
-    <th>Company name</th>
     <th>Date</th>
     <th>Direction</th>
     <th>Netto</th>
@@ -31,7 +30,6 @@
     <tr th:each="invoice: ${invoices}">
         <td th:text="${invoice.id}"></td>
         <td th:text="${invoice.invoiceNumber}"></td>
-        <td th:text="${invoice.company.name}"></td>
         <td th:text="${invoice.date}"></td>
         <td th:text="${invoice.invoiceDirection.direction}"></td>
         <td th:text="${invoice.amountNetto}"></td>

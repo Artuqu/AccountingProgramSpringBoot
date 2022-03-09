@@ -12,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -52,15 +51,14 @@ public class InvoiceController {
     }
 
 
-    @Transactional
     @PostMapping("/add/{id}")
-    public String addInvoicePost(@ModelAttribute("invoice") @Valid Invoice invoice, BindingResult result, Model m) {
+    public String addInvoicePost(@ModelAttribute("invoice") @Valid Invoice invoice, BindingResult result, ModelAndView mav, @PathVariable long id) {
         if (result.hasErrors()) {
-            return "invoices/add";
+            mav.setViewName("invoices/add");
         }
+        invoice.setCompany(this.jas.findCompany(id));
         this.jas.save(invoice);
-        m.addAttribute("invoice", invoice);
-
+        mav.addObject("invoice", invoice);
         return "redirect:../all/{id}";
     }
 

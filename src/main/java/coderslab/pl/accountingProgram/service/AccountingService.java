@@ -21,8 +21,8 @@ Invoice save (Invoice invoice);
 Vat save (Vat vat);
 
 void deleteCompany(Long companyId);
-void deleteVat(Long id);
 void deleteInvoice(Long invoiceId);
+void deleteAllInvoices(Long companyId);
 
 Company findCompany (Long companyId);
 Invoice findInvoice (Long invoiceId);

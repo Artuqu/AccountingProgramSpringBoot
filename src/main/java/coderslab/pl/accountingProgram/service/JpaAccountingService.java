@@ -9,6 +9,7 @@ import coderslab.pl.accountingProgram.repository.InvoiceDirectionRepository;
 import coderslab.pl.accountingProgram.repository.InvoiceRepository;
 import coderslab.pl.accountingProgram.repository.VatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -83,19 +84,20 @@ public class JpaAccountingService implements AccountingService {
         return vr.save(vat);
     }
 
+
     @Override
     public void deleteCompany(Long id) {
         cr.deleteById(id);
     }
 
     @Override
-    public void deleteVat(Long id) {
-        vr.deleteById(id);
+    public void deleteInvoice(Long id) {
+        ir.deleteById(id);
     }
 
     @Override
-    public void deleteInvoice(Long id) {
-        ir.deleteById(id);
+    public void deleteAllInvoices(Long companyId) {
+        ir.deleteAllInvoicesByCompanyId(companyId);
     }
 
 

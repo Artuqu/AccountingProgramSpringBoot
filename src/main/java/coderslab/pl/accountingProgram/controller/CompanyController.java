@@ -1,4 +1,5 @@
 package coderslab.pl.accountingProgram.controller;
+
 import coderslab.pl.accountingProgram.entity.Company;
 import coderslab.pl.accountingProgram.service.JpaAccountingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 
@@ -32,9 +32,10 @@ public class CompanyController {
 
     //add
     @GetMapping("/add")
-    public String addCompany(Model m) {
-        m.addAttribute("company", new Company());
-        return "companies/add";
+    public ModelAndView addCompany(ModelAndView mav) {
+        mav.addObject("company", new Company());
+        mav.setViewName("companies/add");
+        return mav;
     }
 
     @PostMapping("/add")
@@ -71,7 +72,6 @@ public class CompanyController {
     }
 
     //delete
-    @Transactional
     @GetMapping("delete/{id}")
     public String deleteCompany(@ModelAttribute("company") @PathVariable long id, Model m) {
         try {
@@ -79,8 +79,8 @@ public class CompanyController {
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
             m.addAttribute("message", "Operation failed.");
-            return "delete";
         }
+        this.jas.deleteAllInvoices(id);
         this.jas.deleteCompany(id);
         return "redirect:../all";
 //        here I need code to confirmed the deletion
