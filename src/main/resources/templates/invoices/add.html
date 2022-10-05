@@ -15,9 +15,9 @@
 </div>
 <br>
 
-<form th:method="post" th:object="${invoice}">
-        <input type="hidden" id="company.id" th:field="*{company}"
-                 th:value="${company}"/>
+<form method="post" th:object="${invoice}">
+    <input type="hidden" name="company"
+           th:value="${company.id}"/>
     <div>
         <label for="invoiceNumber">Add number of invoice : </label>
         <input id="invoiceNumber" type="text" th:field="*{invoiceNumber}"/>

@@ -16,29 +16,31 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
     List<Invoice> deleteAllInvoicesByCompanyId(long id);
 
 
-    @Query(value = "SELECT Coalesce(Round(sum(amount_brutto)-sum(amount_netto),2),0) FROM invoice WHERE invoice_direction_id = 1 AND company_id LIKE :id", nativeQuery = true)
+    @Query(value = "SELECT Coalesce(Round(sum(amount_brutto)-sum(amount_netto),2),0) FROM invoice LEFT JOIN " +
+            "invoice_direction ON invoice.invoice_direction_id=invoice_direction.id WHERE invoice_direction.direction = 'buy' AND company_id LIKE :id", nativeQuery = true)
     Object allVatSell(@Param("id") Long id);
 
-    @Query(value = "SELECT Coalesce(Round(sum(amount_brutto)-sum(amount_netto),2),0) FROM invoice WHERE invoice_direction_id = 2 AND company_id LIKE :id", nativeQuery = true)
+    @Query(value = "SELECT Coalesce(Round(sum(amount_brutto)-sum(amount_netto),2),0) FROM invoice LEFT JOIN " +
+            "invoice_direction ON invoice.invoice_direction_id=invoice_direction.id WHERE invoice_direction.direction = 'sell' AND company_id LIKE :id", nativeQuery = true)
     Object allVatBuy(@Param("id") Long id);
 
 
     //buying
 
-    @Query("Select Coalesce(Round(sum(i.amountNetto),2),0) from Invoice i WHERE i.invoiceDirection.id = 2 AND i.company.id LIKE :id")
+    @Query("Select Coalesce(Round(sum(i.amountNetto),2),0) from Invoice i WHERE i.invoiceDirection.direction = 'buy' AND i.company.id LIKE :id")
     Object nettoBuy(@Param("id") Long id);
 
 
-    @Query("Select Coalesce(Round(sum(i.amountBrutto),2),0) from Invoice i WHERE i.invoiceDirection.id = 2 AND i.company.id LIKE :id")
+    @Query("Select Coalesce(Round(sum(i.amountBrutto),2),0) from Invoice i WHERE i.invoiceDirection.direction = 'buy' AND i.company.id LIKE :id")
     Object bruttoBuy(@Param("id") Long id);
 
 
     //        selling
-    @Query("Select Coalesce(Round(sum(i.amountNetto),2),0) from Invoice i WHERE i.invoiceDirection.id = 1 AND i.company.id LIKE :id")
+    @Query("Select Coalesce(Round(sum(i.amountNetto),2),0) from Invoice i WHERE i.invoiceDirection.direction = 'sell' AND i.company.id LIKE :id")
     Object nettoSell(@Param("id") Long id);
 
 
-    @Query("Select Coalesce(Round(sum(i.amountBrutto),2),0) from Invoice i WHERE i.invoiceDirection.id = 1 AND i.company.id LIKE :id")
+    @Query("Select Coalesce(Round(sum(i.amountBrutto),2),0) from Invoice i WHERE i.invoiceDirection.direction = 'sell' AND i.company.id LIKE :id")
     Object bruttoSell(@Param("id") Long id);
 
 

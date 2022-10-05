@@ -44,22 +44,21 @@ public class InvoiceController {
 
     //add
     @GetMapping("/add/{id}")
-    public ModelAndView addInvoice(ModelAndView mav) {
-        mav.addObject("invoice", new Invoice());
+    public ModelAndView addInvoice(ModelAndView mav, @PathVariable long id) {
         mav.setViewName("invoices/add");
+        mav.addObject("invoice", new Invoice());
+        mav.addObject("company", jas.findCompany(id));
         return mav;
     }
 
 
     @PostMapping("/add/{id}")
-    public String addInvoicePost(@ModelAttribute("invoice") @Valid Invoice invoice, BindingResult result, ModelAndView mav, @PathVariable long id) {
+    public String addInvoicePost(@ModelAttribute("invoice") @Valid Invoice invoice, BindingResult result) {
         if (result.hasErrors()) {
-            mav.setViewName("invoices/add");
+            return "invoices/add";
         }
-        invoice.setCompany(this.jas.findCompany(id));
         this.jas.save(invoice);
-        mav.addObject("invoice", invoice);
-        return "redirect:../all/{id}";
+        return "redirect:/invoice/all/{id}";
     }
 
 
@@ -112,6 +111,5 @@ public class InvoiceController {
         m.addAttribute("invoice", one);
         return "invoices/success";
     }
-
 
 }

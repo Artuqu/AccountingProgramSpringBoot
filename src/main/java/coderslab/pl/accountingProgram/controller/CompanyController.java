@@ -56,7 +56,7 @@ public class CompanyController {
     }
 
     @PostMapping("edit")
-    public String editInvoice(@ModelAttribute("company") @Valid Company company, BindingResult result, Model m) {
+    public String editCompanyPost(@ModelAttribute("company") @Valid Company company, BindingResult result, Model m) {
         if (result.hasErrors()) {
             return "companies/edit";
         }
@@ -80,8 +80,11 @@ public class CompanyController {
             System.out.println(e.getMessage());
             m.addAttribute("message", "Operation failed.");
         }
-        this.jas.deleteAllInvoices(id);
-        this.jas.deleteCompany(id);
+        Thread thread = new Thread(() -> {
+            this.jas.deleteCompany(id);
+            this.jas.deleteAllInvoices(id);
+        });
+        thread.start();
         return "redirect:../all";
 //        here I need code to confirmed the deletion
     }

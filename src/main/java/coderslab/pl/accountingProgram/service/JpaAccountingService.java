@@ -9,12 +9,10 @@ import coderslab.pl.accountingProgram.repository.InvoiceDirectionRepository;
 import coderslab.pl.accountingProgram.repository.InvoiceRepository;
 import coderslab.pl.accountingProgram.repository.VatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.List;
 

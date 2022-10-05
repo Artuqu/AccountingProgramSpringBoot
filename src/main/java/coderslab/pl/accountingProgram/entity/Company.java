@@ -1,9 +1,6 @@
 package coderslab.pl.accountingProgram.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import org.hibernate.annotations.Proxy;
+import lombok.Data;
 import org.hibernate.validator.constraints.pl.NIP;
 
 import javax.persistence.*;
@@ -12,16 +9,13 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.List;
 
-@Getter
-@Setter
-@ToString
-@Proxy(lazy = false)// rapid load of database
+@Data
 @Entity
 public class Company {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @NotBlank(message = "name can't be null")
     private String name;
@@ -41,7 +35,7 @@ public class Company {
     @Size(min = 26, max = 26, message = "Value has to have 26 numbers")
     private String bankAccount;
 
-    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 // orphanRemoval is important for cascade deleting
     private List<Invoice> invoices;
 }
